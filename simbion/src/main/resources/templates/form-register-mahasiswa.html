@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Login || Portal Beasiswa Universitas X</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Login'"></h3>
+		<form action="/login/submit" method="post">
+			<div class="form-group">
+				<div class="col-4">
+					<label for="role">Role</label>
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="role" onchange='showRole()'>
+						<option value="" selected="selected">--Pilih Role--</option>
+						<option value="1">Mahasiswa</option>
+						<option value="2">Donatur</option>
+					</select>
+				</div>
+				<script type = "text/javascript">
+					function showRole(){
+						if (document.getElementById('role').value=="1") {
+					        document.getElementById('mahasiswa').style.display = 'block';
+					        document.getElementById('jenis_donatur').style.display = 'none';
+					    } else {
+					    	document.getElementById('jenis_donatur').style.display = 'block';
+					    	document.getElementById('mahasiswa').style.display = 'none';
+					    }
+					}
+				</script>
+				
+				<div id="jenis_donatur" style="display: none">
+					<div class="col-4">
+						<label for="jenis_donatur">Jenis Donatur</label>
+					</div>
+					<div class="col-4">
+					    <label class="radio-inline">
+					      <input type="radio" value="1" name="jenis_donatur" id='check_I' onclick='showJenisDonatur()'>Individual
+					    </label>
+					    <label class="radio-inline">
+					      <input type="radio" value="2" name="jenis_donatur" id='check_Y' onclick='showJenisDonatur()'>Yayasan
+					    </label>
+					</div>
+					<br>
+					<div class="col-4" id="y" style="display: none">
+						<a class="nav-link" href="/register-yayasan">Lanjutkan Register Yayasan</a>
+					</div>
+					<div class="col-4" id="i" style="display: none">
+						<a class="nav-link" href="/register-individual">Lanjutkan Register Individual</a>
+					</div>
+					
+				</div>
+				
+				<script type = "text/javascript">
+					function showDonatur(){
+						if (document.getElementById('role').val=="1") {
+					        document.getElementById('individual').style.display = 'block';
+					        document.getElementById('yayasan').style.display = 'none';
+					    } else {
+					    	document.getElementById('individual').style.display = 'none';
+					    	document.getElementById('yayasan').style.display = 'block';
+					    	
+					    }
+					}
+					function showJenisDonatur(){
+						if (document.getElementById('check_I').checked) {
+					        document.getElementById('i').style.display = 'block';
+					        document.getElementById('y').style.display = 'none';
+					    } else if(document.getElementById('check_Y').checked){
+					    	document.getElementById('i').style.display = 'none';
+					    	document.getElementById('y').style.display = 'block';
+					    	
+					    }
+					}
+				</script>
+				
+				<div id="mahasiswa" style="display: none">	
+					<div class="col-4">
+						<label for="username">User Name</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control" type="text" name="username"/>
+					</div>
+					<div class="col-4">
+						<label for="password">Password</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control" type="password" name="password"/>
+					</div>
+					<div class="col-4">
+						<label for="npm">NPM</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="npm"/>
+					</div>
+					<div class="col-4">
+						<label for="email">E-mail</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control" type="text" name="email"/>
+					</div>
+					<div class="col-4">
+						<label for="nama">Nama Lengkap</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="nama"/>
+					</div>
+					<div class="col-4">
+						<label for="no_telp">Nomor Telepon</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control" type="text" name="no_telp"/>
+					</div>
+					<div class="col-4">
+						<label for="alamat">Alamat Tempat Tinggal</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="alamat_tinggal"/>
+					</div>
+					<div class="col-4">
+						<label for="alamat">Alamat Domisili</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="alamat_domisili"/>
+					</div>
+					<div class="col-4">
+						<label for="bank">Instansi Bank</label>
+					</div>
+					<div class="col-4">
+						<select class="form-control" name="nama_bank">
+							<option value="" selected="selected">--Pilih Instansi Bank--</option>
+							<option value="1">Bank Mandiri</option>
+							<option value="2">Bank BNI</option>
+						</select>
+					</div>
+					<div class="col-4">
+						<label for="nomor_rekening">Nomor Rekening</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="nomor_rekening"/>
+					</div>
+					<div class="col-4">
+						<label for="nama_pemilik">Nama Pemilik</label>
+					</div>
+					<div class="col-4">
+						<input class="form-control"type="text" name="nama_pemilik"/>
+					</div>
+					<br>
+					<div class="col-4">
+						<button type="submit" class="btn btn-warning">Simpan</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>
+

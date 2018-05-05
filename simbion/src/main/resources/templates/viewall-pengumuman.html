@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--<title>View All Students</title>-->
+        <title>Cari Data Mahasiswa</title>
+        <script src="/DataTables/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/DataTables/DataTables-1.10.16/css/jquery.dataTables.css" />
+        <script type="text/javascript" src="/DataTables/DataTables-1.10.16/js/jquery.dataTables.js"></script>
+    </head>
+    <div th:replace="fragments/fragment :: header"></div>
+    <body>
+    	<center>
+       		<h3>Lihat Beasiswa Anda</h3>
+       	</center>
+       	<table class="table display dataTable" id="example" role="grid" >
+       		<thead class="thead-dark">
+	       		<tr role="row">
+	       			<th style="width:120px;">Tanggal</th>
+	       			<th style="width:150px;">Judul</th>
+	       			<th style="width:120px;">Pembuat</th>
+	       		</tr>
+	       	</thead>	
+       		<tbody>
+   				<tr>
+   					<td>a</td>
+   					<td><a href="/view-pengumuman">Contoh Pengumuman</a></td>
+   					<td>a</td>
+   				</tr>
+       	</table>
+       	<script>
+		    $(document).ready(function() {
+		    	$('#example').DataTable({
+			        "info":     false
+			    	});
+		    } );
+	    </script>
+    </body>
+</html>

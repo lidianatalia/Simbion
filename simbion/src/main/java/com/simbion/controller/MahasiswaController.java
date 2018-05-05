@@ -27,4 +27,46 @@ public class MahasiswaController {
     {
         return "form-tambah-paket-beasiswa";
     }
+    
+    @RequestMapping("/login")
+    public String login ()
+    {
+        return "form-login";
+    }
+    
+    @RequestMapping("/register")
+    public String register()
+    {
+        return "form-register-mahasiswa";
+    }
+    
+    @RequestMapping("/register-individual")
+    public String register_i()
+    {
+        return "form-register-individual";
+    }
+    
+    @RequestMapping("/register-yayasan")
+    public String register_y()
+    {
+        return "form-register-yayasan";
+    }
+    
+    @RequestMapping("/success")
+    public String success()
+    {
+        return "tambah-sukses";
+    }
+
+    @RequestMapping("/viewall-pengumuman")
+    public String viewall_pengumuman()
+    {
+        return "viewall-pengumuman";
+    }
+    
+    @RequestMapping("/view-pengumuman")
+    public String view_pengumuman()
+    {
+        return "view-pengumuman";
+    }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Login || Portal Beasiswa Universitas X</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Login'"></h3>
+		<form action="/login/submit" method="post">
+			<div class="form-group">
+				<div class="col-4">
+					<label for="username">User Name</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="username"/>
+				</div>
+				<div class="col-4">
+					<label for="password">Password</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="password" name="password"/>
+				</div>
+				<br>
+				<div class="col-4">
+					<button type="submit" class="btn btn-warning">Simpan</button>
+				</div>
+				<br>
+				<div class="col-4">
+					<label >Have Not Account Yes? <a class="nav-link" href="register">Register</a></label>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>
+
