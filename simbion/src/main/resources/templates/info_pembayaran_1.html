@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>FORM LAPORAN PEMBAYARAN BEASISWA</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Form Laporan Pembayaran Beasiswa'"></h3>
+		<form action="/paket/tambah/submit" method="post">
+			<div class="form-group">
+				<div class="col-4">
+					<label for="urutan">Urutan</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="urutan"/>
+				</div>
+				<div class="col-4">
+					<label for="kode">Kode Skema Beasiswa</label>
+				</div>
+				<div class="col-4">
+					<select class="form-control" name="jenis_kelamin">
+						<option value="" selected="selected">--Pilih Kode Skema Beasiswa--</option>
+						<option value="1001">1001</option>
+						<option value="1002">1002</option>
+						<option value="1003">1003</option>
+						<option value="1004">1004</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<label for="no_skema">Nomor Urut Skema Beasiswa</label> 
+				</div>
+				<div class="col-4">
+					<select class="form-control" name="jenis_kelamin">
+						<option value="" selected="selected">--Pilih Kode Skema Beasiswa--</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<label for="npm">NPM</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="npm"/>
+				</div>
+				<div class="col-4">
+					<label for="keterangan">Keterangan</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="keterangan"/>
+				</div>
+				<div class="col-4">
+					<label for="tgl_bayar">Tanggal Bayar</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="date" name="tgl_bayar"/>
+				</div>
+				<div class="col-4">
+					<label for="nominal">Nominal</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="nominal"/>
+				</div>
+				<br>
+				<div class="col-4">
+					<button type="submit" class="btn btn-warning">Submit</button>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>
+

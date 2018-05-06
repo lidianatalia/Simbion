@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--<title>Daftar Beasiswa Aktif</title>-->
+        <title>Daftar Beasiswa Aktif</title>
+        <script src="/DataTables/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/DataTables/DataTables-1.10.16/css/jquery.dataTables.css" />
+        <script type="text/javascript" src="/DataTables/DataTables-1.10.16/js/jquery.dataTables.js"></script>
+    </head>
+    <div th:replace="fragments/fragment :: header"></div>
+    <body>
+    	<center>
+       		<h3>Daftar Beasiswa Aktif</h3>
+       	</center>
+       	<table class="table display dataTable" id="example" role="grid" >
+       		<thead class="thead-dark">
+	       		<tr role="row">
+	       			<th style="width:30px;">No</th>
+	       			<th style="width:160px;">Nama Beasiswa</th>
+	       			<th style="width:80px;">Waktu Tutup Pendaftaran</th>
+	       			<th style="width:80px;">Status Beasiswa</th>
+	       			<th style="width:120px;">Jumlah Pendaftar</th>
+	       		</tr>
+	       	</thead>	
+       		<tbody>
+   				<tr>
+   					<td><a class="nav-link" href="/skema/detail" data-rel="popup">1001</a></td>
+   					<td>Beasiswa S2 University of Edinburgh</td>
+   					<td>4/2/2017</td>
+   					<td>aktif</td>
+   					<td>0</td>
+   				</tr>
+   				<tr>
+   					<td><a class="nav-link" href="/skema/detail" data-rel="popup">1007</a></td>
+   					<td>Beasiswa S1 Rajawali</td>
+   					<td>11/1/2017</td>
+   					<td>aktif</td>
+   					<td>0</td>
+   				</tr>
+   				<tr>
+   					<td><a class="nav-link" href="/skema/detail" data-rel="popup">1010</a></td>
+   					<td>Beasiswa S1 Tanoto</td>
+   					<td>2/16/2018</td>
+   					<td>aktif</td>
+   					<td>0</td>
+   				</tr>
+   			</tbody>
+       	</table>
+       	<script>
+		    $(document).ready(function() {
+		    	$('#example').DataTable({
+			        "info":     false
+			    	});
+		    } );
+	    </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Daftar Beasiswa Aktif | Portal Beasiswa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/uniform.css" />
+<link rel="stylesheet" href="/css/select2.css" />
+<link rel="stylesheet" href="/css/maruti-style.css" />
+<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
+</head>
+<body>
+<div th:replace="fragments/fragment :: header"></div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/donatur/view-beasiswa" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Lihat Beasiswa Saya</a></div>
+	<h1>Donatur</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title">
+             <span class="icon"><i class="icon-th"></i></span> 
+            <h5>List Beasiswa</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+	       			<th>No Urut Skema Beasiswa</th>
+	       			<th>Kode Skema</th>
+	       			<th>Waktu Penutupan</th>
+	       			<th>Status</th>
+	       			<th>Jumlah Pendaftar</th>
+	       			<th>Rincian</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr>
+   					<td >1</td>
+   					<td >20172018</td>
+   					<td >31 April 2018</td>
+   					<td >Ditutup</td>
+   					<td >15</td>
+   					<td><a class="nav-link" href="/donatur/view-detail-beasiswa" data-rel="popup"><button type="button" class="btn btn-info">Detail Beasiswa</button></a></td>
+   				</tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+<script src="/js/jquery.min.js"></script> 
+<script src="/js/jquery.ui.custom.js"></script> 
+<script src="/js/bootstrap.min.js"></script> 
+<script src="/js/jquery.uniform.js"></script> 
+<script src="/js/select2.min.js"></script> 
+<script src="/js/jquery.dataTables.min.js"></script> 
+<script src="/js/maruti.js"></script> 
+<script src="/js/maruti.tables.js"></script>
+</body>
+</html>

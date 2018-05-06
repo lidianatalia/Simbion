@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Form Pendaftaran Skema Beasiswa</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Tambah Paket Beasiswa Baru'"></h3>
+		<form action="/paket/tambah/submit" method="post">
+			<div class="form-group">
+				<div class="col-4">
+					<label for="kode">Kode</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="kode"/>
+				</div>
+				<div class="col-4">
+					<label for="nama_paket">Nama Paket Beasiswa</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="nama_paket"/>
+				</div>
+				<div class="col-4">
+					<label for="jenis_paket">Jenis Paket Beasiswa</label> 
+				</div>
+				<div class="col-4">
+					<select class="form-control" name="jenis_kelamin">
+						<option value="" selected="selected">--Pilih Jenis Beasiswa--</option>
+						<option value="prestasi">Beasiswa Prestasi</option>
+						<option value="bantuan">Beasiswa Bantuan Belajar</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<label for="deskripsi">Deskripsi</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="deskripsi"/>
+				</div>
+				<div class="col-4">
+					<label for="syarat">Syarat Beasiswa</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="syarat"/>
+				</div>
+				
+				<br>
+				<div class="col-4">
+					<button type="submit" class="btn btn-warning">Submit</button>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>
+

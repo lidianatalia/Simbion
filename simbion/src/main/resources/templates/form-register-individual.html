@@ -1,77 +1,132 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Register || Portal Beasiswa Universitas X</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
-	</head>
-	<div th:replace="fragments/fragment :: header"></div>
-	<body>
-		<h3 class="page-header col-8" th:text="'Login'"></h3>
-		<form action="/login/submit" method="post">
-			<div class="form-group">
-				<div class="col-4">
-					<label for="username">User Name</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="text" name="username"/>
-				</div>
-				<div class="col-4">
-					<label for="password">Password</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="password" name="password"/>
-				</div>
-				<div class="col-4">
-					<label for="nomor_identitas_donatur">Nomor Identitas</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control"type="text" name="nomor_identitas_donatur"/>
-				</div>
-				<div class="col-4">
-					<label for="nik">NIK</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="text" name="nik"/>
-				</div>
-				<div class="col-4">
-					<label for="email">E-mail</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="text" name="email"/>
-				</div>
-				<div class="col-4">
-					<label for="nama">Nama Lengkap</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control"type="text" name="nama"/>
-				</div>
-				<div class="col-4">
-					<label for="npwp">NPWP</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="text" name="npwp"/>
-				</div>
-				<div class="col-4">
-					<label for="no_telp">Nomor Telepon</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control" type="text" name="no_telp"/>
-				</div>
-				<div class="col-4">
-					<label for="alamat">Alamat Lengkap</label>
-				</div>
-				<div class="col-4">
-					<input class="form-control"type="text" name="alamat"/>
-				</div>
-			</div>
-			<br>
-			<div class="col-4">
-				<button type="submit" class="btn btn-warning">Simpan</button>
-			</div>
-		</form>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Form Pendaftaran Beasiswa | Portal Beasiswa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/uniform.css" />
+<link rel="stylesheet" href="/css/select2.css" />
+<link rel="stylesheet" href="/css/maruti-style.css" />
+<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
+</head>
+<body>
 
+<!--Header-part-->
+<div id="header">
+  <h2>Portal Beasiswa Universitas X</h2>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-messaages-->
+<div class="btn-group rightzero"> <a class="top_message tip-left" title="Manage Files"><i class="icon-file"></i></a> <a class="top_message tip-bottom" title="Manage Users"><i class="icon-user"></i></a> <a class="top_message tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a> <a class="top_message tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a> </div>
+<!--close-top-Header-messaages--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+  </ul>
+</div>
+<div id="search">
+  <input type="text" placeholder="Search here..."/>
+  <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<!--close-top-Header-menu-->
+
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
+</div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-user"></i> Registrasi</a><a href="#" class="current">Register Individual Donatur </a></div>
+	<h1>Pendaftaran</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon">
+					<i class="icon-pencil"></i>									
+				</span>
+				<h5>Form Pendaftaran Individual Donatur</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+					<div class="control-group">
+						<label class="control-label">User Name</label>
+						<div class="controls">
+							<input type="text" id="required" name="username">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Password</label>
+						<div class="controls">
+							<input type="password" id="required" name="password">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Nomor Identitas</label>
+						<div class="controls">
+							<input type="text" id="required" name="nomor_identitas_donatur">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">NIK</label>
+						<div class="controls">
+							<input type="text" id="required" name="nik">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">E-mail</label>
+						<div class="controls">
+							<input type="text" id="required" name="email">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Nama Lengkap</label>
+						<div class="controls">
+							<input type="text" id="required" name="nama">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">NPWP</label>
+						<div class="controls">
+							<input type="text" id="required" name="npwp">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Nomor Telepon</label>
+						<div class="controls">
+							<input type="text" id="required" name="no_telp">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Alamat Lengkap</label>
+						<div class="controls">
+							  <textarea class="span5" name="alamat_domisili"></textarea>
+						</div>
+					</div>
+					<div class="form-actions">
+						<input type="submit"value="Simpan" class="btn btn-success">
+					</div>
+				</form>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.ui.custom.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.uniform.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.js"></script>
+<script src="/js/maruti.js"></script>
+<script src="/js/maruti.form_validation.js"></script>
+</body>
 </html>
-

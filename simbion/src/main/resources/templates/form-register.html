@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Form Pendaftaran Beasiswa | Portal Beasiswa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/uniform.css" />
+<link rel="stylesheet" href="/css/select2.css" />
+<link rel="stylesheet" href="/css/maruti-style.css" />
+<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
+</head>
+<body>
+
+<!--Header-part-->
+<div id="header">
+  <h2>Portal Beasiswa Universitas X</h2>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-messaages-->
+<div class="btn-group rightzero"> <a class="top_message tip-left" title="Manage Files"><i class="icon-file"></i></a> <a class="top_message tip-bottom" title="Manage Users"><i class="icon-user"></i></a> <a class="top_message tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a> <a class="top_message tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a> </div>
+<!--close-top-Header-messaages--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+  </ul>
+</div>
+<div id="search">
+  <input type="text" placeholder="Search here..."/>
+  <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<!--close-top-Header-menu-->
+
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
+</div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Beranda</a></div>
+	<h1>Pendaftaran</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon">
+					<i class="icon-pencil"></i>									
+				</span>
+				<h5>Form Pendaftaran</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+					<div class="control-group">
+						<label class="control-label">Pilih Role</label>
+						<div class="controls">
+							<select class="select2-containername"  name="role" id="role" onchange='showRole()'>
+								<option value="" selected="selected" disabled="disabled">--Pilih Role--</option>
+								<option value="1">Mahasiswa</option>
+								<option value="2">Donatur</option>
+							</select>
+						</div>
+					</div>
+					<div id="jenis_donatur" style="display: none">
+						<div class="control-group">
+							<label class="control-label">Jenis Donatur</label>
+							<div class="controls">
+							  <label>
+								<div class="radio" id="uniform-undefined"><span class=""><input type="radio" value="1" name="jenis_donatur" id='check_I' onclick='showJenisDonatur()' style="opacity: 0;"></span></div>
+								Individual</label>
+							  <label>
+								<div class="radio" id="uniform-undefined"><span class=""><input type="radio" value="1" name="jenis_donatur" id='check_Y' onclick='showJenisDonatur()' style="opacity: 0;"></span></div>
+								Yayasan</label>
+							<div class="form-actions" style="display: none" id="i">
+								<a class="nav-link" href="/register-individual" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
+							</div>
+							<div class="form-actions" style="display: none" id="y">
+								<a class="nav-link" href="/register-yayasan" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div id="mahasiswa" style="display: none">
+						<div class="control-group">
+							<label class="control-label">User Name</label>
+							<div class="controls">
+								<input type="text" id="required" name="username">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Password</label>
+							<div class="controls">
+								<input type="password" id="required" name="password">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">NPM</label>
+							<div class="controls">
+								<input type="text" id="number" name="npm">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Email</label>
+							<div class="controls">
+								<input type="text" id="required" name="email">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Nama Lengkap</label>
+							<div class="controls">
+								<input type="text" id="required" name="nama">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Nomor Telepon</label>
+							<div class="controls">
+								<input type="text" id="required" name="no_telp">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Alamat Tempat Tinggal</label>
+							<div class="controls">
+								<textarea class="span5" name="alamat_tinggal"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Alamat Domisili</label>
+							<div class="controls">
+							  <textarea class="span5" name="alamat_domisili"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Instansi Bank</label>
+							<div class="controls">
+								<input type="text" id="required" name="nama_bank">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Nomor Rekening</label>
+							<div class="controls">
+								<input type="text" id="required" name="no_rek">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Nama Pemilik</label>
+							<div class="controls">
+								<input type="text" id="required" name="nama_pemilik">
+							</div>
+						</div>
+						<div class="form-actions">
+							<input type="submit" onclick="alert('Berhasil Submit')" value="Simpan" class="btn btn-success">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type = "text/javascript">
+	function showRole(){
+		if (document.getElementById('role').value=="1") {
+			document.getElementById('mahasiswa').style.display = 'block';
+			document.getElementById('jenis_donatur').style.display = 'none';
+		} else {
+			document.getElementById('jenis_donatur').style.display = 'block';
+			document.getElementById('mahasiswa').style.display = 'none';
+		}
+	}
+	
+	function showDonatur(){
+	if (document.getElementById('role').val=="1") {
+		document.getElementById('individual').style.display = 'block';
+		document.getElementById('yayasan').style.display = 'none';
+	} else {
+		document.getElementById('individual').style.display = 'none';
+		document.getElementById('yayasan').style.display = 'block';
+		
+	}
+	}
+	function showJenisDonatur(){
+		if (document.getElementById('check_I').checked) {
+			document.getElementById('i').style.display = 'block';
+			document.getElementById('y').style.display = 'none';
+		} else if(document.getElementById('check_Y').checked){
+			document.getElementById('i').style.display = 'none';
+			document.getElementById('y').style.display = 'block';
+			
+		}
+	}
+</script>
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.ui.custom.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.uniform.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.js"></script>
+<script src="/js/maruti.js"></script>
+<script src="/js/maruti.form_validation.js"></script>
+</body>
+</html>

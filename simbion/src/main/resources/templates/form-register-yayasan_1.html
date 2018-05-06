@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Register || Portal Beasiswa Universitas X</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Login'"></h3>
+		<form action="/login/submit" method="post">
+			<div class="form-group">
+				<div class="col-4">
+					<label for="username">User Name</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="username"/>
+				</div>
+				<div class="col-4">
+					<label for="password">Password</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="password" name="password"/>
+				</div>
+				<div class="col-4">
+					<label for="nomor_identitas_donatur">Nomor Identitas</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="nomor_identitas_donatur"/>
+				</div>
+				<div class="col-4">
+					<label for="no_sk_yayasan">Nomor SK Yayasan</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="no_sk_yayasan"/>
+				</div>
+				<div class="col-4">
+					<label for="email">E-mail</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="email"/>
+				</div>
+				<div class="col-4">
+					<label for="nama">Nama Yayasan</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="nama"/>
+				</div>
+				<div class="col-4">
+					<label for="no_telp">Nomor Telepon Contact Person</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="no_telp"/>
+				</div>
+				<div class="col-4">
+					<label for="alamat">Alamat Yayasan</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="alamat"/>
+				</div>
+			</div>
+			<br>
+			<div class="col-4">
+				<button type="submit" class="btn btn-warning">Simpan</button>
+			</div>
+		</form>
+	</body>
+
+</html>
+

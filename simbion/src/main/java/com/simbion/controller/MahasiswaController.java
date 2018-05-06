@@ -20,13 +20,7 @@ public class MahasiswaController {
     public String index ()
     {
 		return "index";
-    }
-	
-    @RequestMapping("/paket/tambah")
-    public String add ()
-    {
-        return "form-tambah-paket-beasiswa";
-    }
+    }	
     
     @RequestMapping("/login")
     public String login ()
@@ -37,7 +31,7 @@ public class MahasiswaController {
     @RequestMapping("/register")
     public String register()
     {
-        return "form-register-mahasiswa";
+        return "form-register";
     }
     
     @RequestMapping("/register-individual")
@@ -68,5 +62,53 @@ public class MahasiswaController {
     public String view_pengumuman()
     {
         return "view-pengumuman";
+    }
+
+    @RequestMapping("/donatur/form-skema-tambah")
+    public String daftar_paket ()
+    {
+    	return "daftarskemabeasiswa";
+    }
+    
+    @RequestMapping("/donatur/form-beasiswa-tambah")
+    public String daftar_beasiswa()
+    {
+    	return "beasiswa_aktif";
+    }
+    
+    @RequestMapping("/view-skema-detail")
+    public String detail ()
+    {
+    	return "detail_beasiswa";
+    }
+    
+    @RequestMapping("/donatur/form-pembayaran-tambah")
+    public String info_bayar()
+    {
+    	return "info_pembayaran";
+    }
+    
+    @RequestMapping("/mhs/form-daftar-beasiswa")
+    public String daftarBeasiswa ()
+    {
+        return "daftar_beasiswa";
+    }
+    
+    @RequestMapping("/donatur/view-beasiswa")
+    public String lihatBeasiswa ()
+    {
+        return "lihat-beasiswa-donatur";
+    }
+    
+    @RequestMapping("/donatur/view-detail-beasiswa")
+    public String lihatDetailBeasiswa ()
+    {
+        return "detail_beasiswa_donatur";
+    }
+    
+    @RequestMapping("/admin/form-tempat-wawancara-tambah")
+    public String tempatWawancara ()
+    {
+        return "tempat-wawancara";
     }
 }

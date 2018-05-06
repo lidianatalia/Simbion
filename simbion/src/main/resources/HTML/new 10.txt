@@ -1,0 +1,23 @@
+Login (login.html, register.html)
+- Semua
+Register
+- Donatur, Mhs
+
+Menu Paket Beasiswa (Donatur)
+- Membuat Beasiswa Baru 
+	+ Membuat Paket Beasiswa Baru (daftarskemabeasiswa.html)
+	+ Menambah Beasiswa Dari Paket (beasiswa_aktif.html)
+
+- Melihat Informasi Beasiswa Aktif (Semua)  (index.html)
+	+ Detail Beasiswa (detail_beasiswa.html)
+		Muncul Button Daftar Beasiswa jika Mahasiswa
+		
+- Daftar Beasiswa (Mahasiswa) (daftar_beasiswa.html)
+
+- Menu Lihat Beasiswa Anda (Donatur) (lihat-beasiswa-donatur.html)
+	+ Detail Beasiswa (detail-beasiswa-donatur.html)
+	
+- Membuat Tempat Wawancara (admin) (membuat-tempat-wawancara.html)
+
+- Lihat Pengumuman (Semua) (viewall-pengumuman.html)
+	+ Detail PEngumuman (view-pengumuman.html)

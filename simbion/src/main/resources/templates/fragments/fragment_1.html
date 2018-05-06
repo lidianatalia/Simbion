@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Fragment</title>
+	</head>
+	<body>
+		<div th:fragment="header">
+			<link rel = "stylesheet" href="/css/bootstrap.min.css" />
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">SI Beasiswa Universitas X</a>
+		
+			<div class="collapse navbar-collapse dropdown" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Beranda</a>
+					</li>
+
+					<!-- 
+					<li class="nav-item">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Membuat Beasiswa Baru<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Membuat Paket Beasiswa Baru</a></li>
+							<li><a href="#">Menambahkan Beasiswa dari Paket</a></li>
+						</ul>
+					</li> -->
+					<li class="nav-item">
+						<a class="nav-link" href="/skema/tambah">Membuat Paket Beasiswa Baru</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/skema/tambah/beasiswa">Menambahkan Beasiswa dari Paket</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/skema/lihat">Daftar Beasiswa Aktif</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/info/pembayaran">Info Pembayaran</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/viewall-pengumuman">Lihat Pengumuman</a>
+					</li>
+					<li class="nav-item">
+                        <a class="nav-link" href="/beasiswa/daftar">Daftar Beasiswa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/beasiswa/donatur/lihat">Lihat Beasiswa Anda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/beasiswa/tempatwawancara">Membuat Tempat Wawancara</a>
+                    </li>
+				</ul>
+			</div>
+		</nav>
+		</div>
+	</body>
+</html>

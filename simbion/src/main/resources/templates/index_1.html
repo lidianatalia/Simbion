@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<title>Lihat Data Mahasiswa Berdasarkan NPM</title>
+		<script src="/DataTables/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/DataTables/DataTables-1.10.16/css/jquery.dataTables.css" />
+        <script type="text/javascript" src="/DataTables/DataTables-1.10.16/js/jquery.dataTables.js"></script>
+	</head>	
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<div class="form-group">
+			<div class="col-12">
+				<h2>Sistem Informasi Beasiswa Universitas X</h2>
+				<h5>--Selamat datang--</h5>
+				 
+				<table class="table display dataTable" id="example" role="grid" >
+       		<thead class="thead-dark">
+	       		<tr role="row">
+	       			<th style="width:30px;">No</th>
+	       			<th style="width:70px;">Nama Beasiswa</th>
+	       			<th style="width:160px;">Waktu Tutup Pendaftaran</th>
+	       			<th style="width:120px;">Status Beasiswa</th>
+	       			<th style="width:80px;">Jumlah Pendaftar</th>
+	       			<th style="width:120px;">Daftar Beasiswa</th>
+
+	       		</tr>
+	       	</thead>	
+       		<tbody>
+   				<tr >
+   					<td >1</td>
+   					<td >Beasiswa Tanoto</td>
+   					<td >10 Mei 2018</td>
+   					<td >Aktif</td>
+   					<td >50</td>
+   					<td><a ><button type="button" onclick="Berhasil mendaftar beasiswa">Daftar Beasiswa Ini</button></a></td>
+   				</tr>
+       	</table>
+       	<script>
+		    $(document).ready(function() {
+		    	$('#example').DataTable({
+			        "info":     false
+			    	});
+		    } );
+	    </script>
+			</div>
+				
+		</div>
+	</body>
+</html>
+
