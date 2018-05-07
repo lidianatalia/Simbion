@@ -12,11 +12,11 @@
 	<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment :: header"></div>
+<div th:replace="/fragments/fragment_admin :: header"></div>
 	<div id="content">
 		<div id="content-header">
-			<div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
-				<h1></h1>
+			<div id="breadcrumb"> <a href="/admin" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
+				<h1>Administrator</h1>
 			</div>
   <div class="container-fluid">
     <div class="row-fluid">
@@ -45,7 +45,7 @@
    					<td >31 April 2018</td>
    					<td >Ditutup</td>
    					<td >15</td>
-   					<td><a href ="/view-detail-skema"><button type="button" class="btn btn-info" >Detail</button></a></td>
+   					<td><a href ="/admin/view-detail-skema"><button type="button" class="btn btn-info" >Detail</button></a></td>
    				</tr>
               </tbody>
             </table>

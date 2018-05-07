@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Daftar Pengumuman | Portal Beasiswa</title>
+<title>Detail Beasiswa Aktif | Portal Beasiswa</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment :: header"></div>
+<div th:replace="fragments/fragment_admin :: header"></div>
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Daftar Pengumuman</a></div>
-	<h1></h1>
+    <div id="breadcrumb"> <a href="/admin/viewall-pengumuman" class="tip-bottom"><i class="icon-home"></i> Lihat Pengumuman</a><a href="#" class="current"> Detail Pengumuman</a></div>
+	<h1>Administrator</h1>
   </div>
   <div class="container-fluid">
     <div class="row-fluid">
@@ -24,37 +24,13 @@
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>Daftar Pengumuman</h5>
+            <h5>Pengumuman Hasil Beasiswa Aktif</h5>
           </div>
-          <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
-              <thead>
-                <tr>
-	       			<th>Tanggal</th>
-	       			<th>Judul</th>
-	       			<th>Pembuat</th>
-                </tr>
-              </thead>
-              <tbody>
-                 <tr>
-   					<td>4/2/2017</td>
-					<td><a class="nav-link" href="/view-pengumuman" data-rel="popup">Pengumuman Beasiswa S2 University of Edinburgh</a></td>
-   					<td>Humas Edinburgh</td>
-   					
-   				</tr>
-   				<tr>
-					<td>11/1/2017</td>
-   					<td><a class="nav-link" href="/view-pengumuman" data-rel="popup">Pengumuman Beasiswa S2 Rajawali</a></td>
-   					<td>Humas Rajawali</td>
-   				</tr>
-   				<tr>
-					<td>2/16/2018</td>
-   					<td><a class="nav-link" href="/view-pengumuman" data-rel="popup">Pengumuman Beasiswa S2 Tanoto</a></td>
-   					<td>Humas Tanoto</td>
-   					
-   				</tr>
-              </tbody>
-            </table>
+          <div class="widget-content">
+			<h3>Beasiswa S2 University of Edinburgh - 1001</h3>
+			<h5>Beasiswa Prestasi dibuat oleh 122214894851</h5>
+			<h5>[merupakan batuan basiswa terhadap mahasiswa yang berprestasi]</h5>
+			<h5>Syarat Beasiswa : Minimal IPS=3.3</h5>
           </div>
         </div>
       </div>

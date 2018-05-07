@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Lihat Beasiswa Saya | Portal Beasiswa</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
-	<link rel="stylesheet" href="/css/uniform.css" />
-	<link rel="stylesheet" href="/css/select2.css" />
-	<link rel="stylesheet" href="/css/maruti-style.css" />
-	<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
+<title>Daftar Beasiswa Aktif | Portal Beasiswa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/uniform.css" />
+<link rel="stylesheet" href="/css/select2.css" />
+<link rel="stylesheet" href="/css/maruti-style.css" />
+<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment :: header"></div>
-	<div id="content">
-		<div id="content-header">
-			<div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
-				<h1></h1>
-			</div>
+<div th:replace="fragments/fragment_donatur :: header"></div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/donatur/view-beasiswa" class="tip-bottom"><i class="icon-home"></i> Lihat Beasiswa Saya</a></div>
+	<h1>Donatur</h1>
+  </div>
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
@@ -30,22 +30,22 @@
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-	       			<th>No</th>
-	       			<th>Nama Beasiswa</th>
-	       			<th>Waktu Tutup Pendaftaran</th>
-	       			<th>Status Beasiswa</th>
+	       			<th>No Urut Skema Beasiswa</th>
+	       			<th>Kode Skema</th>
+	       			<th>Waktu Penutupan</th>
+	       			<th>Status</th>
 	       			<th>Jumlah Pendaftar</th>
 	       			<th>Rincian</th>
                 </tr>
               </thead>
               <tbody>
-                 <tr >
+                 <tr>
    					<td >1</td>
-   					<td >Beasiswa S2 Tanoto</td>
+   					<td >20172018</td>
    					<td >31 April 2018</td>
    					<td >Ditutup</td>
    					<td >15</td>
-   					<td><a href ="/view-detail-skema"><button type="button" class="btn btn-info" >Detail</button></a></td>
+   					<td><a class="nav-link" href="/donatur/view-detail-beasiswa" data-rel="popup"><button type="button" class="btn btn-info">Detail Beasiswa</button></a></td>
    				</tr>
               </tbody>
             </table>
