@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PenggunaModel {
+public class AdminModel {
 	private String username;
-	private String password;
-	private String role;
 }
