@@ -27,4 +27,34 @@ public class MahasiswaController {
     {
         return "form-tambah-paket-beasiswa";
     }
+    
+    @RequestMapping("/viewall")
+    public String viewall ()
+    {
+        return "viewall";
+    }
+    
+    @RequestMapping("/beasiswa/daftar")
+    public String daftarBeasiswa ()
+    {
+        return "daftarbeasiswa";
+    }
+    
+    @RequestMapping("/beasiswa/donatur/lihat")
+    public String lihatBeasiswa ()
+    {
+        return "lihat-beasiswa-donatur";
+    }
+    
+    @RequestMapping("/beasiswa/donatur/detail/lihat")
+    public String lihatDetailBeasiswa ()
+    {
+        return "detail-beasiswa-donatur";
+    }
+    
+    @RequestMapping("/beasiswa/tempatwawancara")
+    public String tempatWawancara ()
+    {
+        return "tempat-wawancara";
+    }
 }

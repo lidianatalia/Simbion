@@ -11,29 +11,30 @@
 	<body>
 		<div class="form-group">
 			<div class="col-12">
-				<h2>Sistem Informasi Beasiswa Universitas X</h2>
-				<h5>--Selamat datang--</h5>
-				 
+				<h3>Detail Beasiswa</h3>				 
 				<table class="table display dataTable" id="example" role="grid" >
        		<thead class="thead-dark">
 	       		<tr role="row">
-	       			<th style="width:30px;">No</th>
-	       			<th style="width:70px;">Nama Beasiswa</th>
-	       			<th style="width:160px;">Waktu Tutup Pendaftaran</th>
-	       			<th style="width:120px;">Status Beasiswa</th>
-	       			<th style="width:80px;">Jumlah Pendaftar</th>
-	       			<th style="width:120px;">Daftar Beasiswa</th>
+	       			<th style="width:30px;">No Urut Pendaftar</th>
+	       			<th style="width:70px;">Nama</th>
+	       			<th style="width:160px;">NPM</th>
+	       			<th style="width:120px;">Waktu Daftar</th>
+	       			<th style="width:80px;">Status Terima</th>
+	       			<th style="width:120px;">Pilih</th>
 
 	       		</tr>
 	       	</thead>	
        		<tbody>
    				<tr >
    					<td >1</td>
-   					<td >Beasiswa Tanoto</td>
-   					<td >10 Mei 2018</td>
-   					<td >Aktif</td>
-   					<td >50</td>
-   					<td><a ><button type="button" onclick="Berhasil mendaftar beasiswa">Daftar Beasiswa Ini</button></a></td>
+   					<td >Ini Contoh</td>
+   					<td >123456</td>
+   					<td >1 Jan 1970</td>
+   					<td >Tidak Aktif</td>
+   					<td>
+   						<a href="/beasiswa/donatur/detail/lihat"><button type="button" >Terima</button></a>
+   						<a href="/beasiswa/donatur/detail/lihat"><button type="button" >Tolak</button></a>
+   					</td>
    				</tr>
        	</table>
        	<script>
