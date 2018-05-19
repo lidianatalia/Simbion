@@ -1,5 +1,7 @@
 package com.simbion.dao;
+import org.apache.ibatis.annotations.Mapper;
 
-public class SimbionMapper {
-
+@Mapper
+public interface SimbionMapper {
+	
 }
