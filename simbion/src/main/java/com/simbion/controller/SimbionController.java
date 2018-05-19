@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.simbion.service.SimbionService;
+
 @Controller
 public class SimbionController {
 	
 	@Autowired
+	SimbionService simbionDAO;
+	
     //feature all user
 	@RequestMapping("/")
     public String index ()
