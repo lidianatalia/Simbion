@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Tempat Wawancara</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Tempat Wawancara'"></h3>
+		<form action="/paket/tambah/submit" method="post">
+			<div class="form-group">
+			
+				<div class="col-4">
+					<label for="kode" >Kode</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="kode" />
+				</div>
+				<div class="col-4">
+					<label for="nama">Nama</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text"/>
+				</div>
+				<div class="col-4">
+					<label for="lokasi">Lokasi</label> 
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="lokasi"/>
+				</div>
+				<div class="col-4">
+					<br><button type="button" onclick="alert('Berhasil Submit')">Submit</button>
+				</div>
+				
+			</div>
+		</form>
+	</body>
+
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Form Pendaftaran Beasiswa</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	</head>
+	<div th:replace="fragments/fragment :: header"></div>
+	<body>
+		<h3 class="page-header col-8" th:text="'Form Pendaftaran Beasiswa'"></h3>
+		<form action="/paket/tambah/submit" method="post">
+			<div class="form-group">
+			<div class="col-4">
+					<label for="nama">Kode Beasiswa</label>
+				</div>
+				<div class="col-4">
+					<select class="form-control" name="jalur_masuk">
+						<option value="" selected="selected">--Pilih Kode Beasiswa--</option>
+						<option value="Undangan Olimpiade">Beasiswa001</option>
+						<option value="Undangan Reguler / SNMPTN">Beasiswa002</option>
+						<option value="Undangan Paralel / PPKB">Beasiswa003</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<label for="nama" value="1234567">NPM</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="text" name="npm" value="123456789" disabled/>
+				</div>
+				<div class="col-4">
+					<label for="nama">Email</label>
+				</div>
+				<div class="col-4">
+					<input class="form-control"type="text" name="email" value="basdat@ui.ac.id" disabled/>
+				</div>
+				<div class="col-4">
+					<label for="indeks_prestasi_semester">Indeks Prestasi Semester</label> 
+				</div>
+				<div class="col-4">
+					<input class="form-control" type="indeks_prestasi_semester" name="indeks_prestasi_semester"/>
+				</div>
+				<div class="col-4">
+					<br><button type="button" onclick="alert('Berhasil Submit')">Submit</button>
+				</div>
+				
+			</div>
+		</form>
+	</body>
+
+</html>
+
