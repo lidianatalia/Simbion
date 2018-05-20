@@ -8,8 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PenggunaModel {
+public class DonaturModel {
+	private String nomor_identitas;
+	private String email;
+	private String nama;
+	private String npwp;
+	private String no_telp;
+	private String alamat;
 	private String username;
-	private String password;
-	private String role;
 }

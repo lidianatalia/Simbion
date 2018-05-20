@@ -22,7 +22,6 @@
 //		http
 //			.authorizeRequests()
 //			.antMatchers("/files/*").permitAll()
-//			.antMatchers("/index").permitAll()
 //			.antMatchers("/register").permitAll()
 //			.antMatchers("/register-individual").permitAll()
 //			.antMatchers("/register-yayasan").permitAll()
@@ -34,7 +33,7 @@
 //			.and()
 //			.formLogin()
 //			.loginPage("/login").permitAll()
-//			.defaultSuccessUrl("/mhs",true)
+//			.defaultSuccessUrl("/home",true)
 //			.and()
 //			.logout().permitAll();
 //	}
@@ -54,8 +53,8 @@
 //	{
 //		auth.jdbcAuthentication().dataSource(dataSource)
 //		.passwordEncoder(NoOpPasswordEncoder.getInstance())
-//		.usersByUsernameQuery("SELECT U.username, U.password, '1' as enabled FROM user_account U WHERE U.username =?")
-//		.authoritiesByUsernameQuery("select username, role from user_account where username=?");
+//		.usersByUsernameQuery("SELECT username, password, '1' as enabled FROM pengguna where username=?")
+//		.authoritiesByUsernameQuery("SELECT username, role FROM pengguna WHERE username=?");
 //	}
 //	
 //}

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.simbion.model.SkemaBeasiswaAktifModel;
+import com.simbion.model.TempatWawancaraModel;
 import com.simbion.service.SimbionService;
 
 @Controller
@@ -20,18 +22,6 @@ public class SimbionController {
 	SimbionService simbionDAO;
 	
     //feature all user
-	@RequestMapping("/")
-    public String index ()
-    {
-		return "index";
-    }	
-    
-    @RequestMapping("/login")
-    public String login ()
-    {
-        return "form-login";
-    }
-    
     @RequestMapping("/register")
     public String register()
     {
@@ -169,7 +159,7 @@ public class SimbionController {
     @RequestMapping("/admin/form-tempat-wawancara-tambah")
     public String tempatWawancara ()
     {
-        return "/admin/form-tempat-wawancara-add";
+    	return "/admin/form-tempat-wawancara-add";
     }
     
     @RequestMapping("/admin/form-pengumuman-tambah")
@@ -190,8 +180,11 @@ public class SimbionController {
     }
     
     @RequestMapping("/admin/viewall-tempat-wawancara")
-    public String viewall_tempat_wawancara()
+    public String viewall_tempat_wawancara(Model model)
     {
+    	List<TempatWawancaraModel>tempat_wawancara=simbionDAO.selectAllTempatWawancara();
+    	model.addAttribute("tempat_wawancara",tempat_wawancara);
+        
         return "/admin/viewall-tempat-wawancara";
     }
 }

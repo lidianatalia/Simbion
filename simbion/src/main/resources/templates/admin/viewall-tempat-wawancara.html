@@ -36,10 +36,10 @@
                 </tr>
               </thead>
               <tbody>
-                 <tr>
-   					<td>1001</td>
-   					<td>Ruang 2303</td>
-   					<td>Fakultas Ilmu Komputer Gedung B</td>
+                 <tr th:each="tempat,iterationStatus:${tempat_wawancara}">
+   					<td th:text="${tempat.kode}"></td>
+   					<td th:text="${tempat.nama}"></td>
+   					<td th:text="${tempat.lokasi}"></td>
    				</tr>
               </tbody>
             </table>
