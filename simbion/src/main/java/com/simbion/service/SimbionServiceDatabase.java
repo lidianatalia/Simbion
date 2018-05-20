@@ -5,6 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.simbion.dao.SimbionMapper;
+<<<<<<< HEAD
+=======
+import com.simbion.model.IndividualDonorModel;
+import com.simbion.model.PenggunaModel;
+>>>>>>> lili
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.PenggunaModel;
@@ -24,12 +29,15 @@ public class SimbionServiceDatabase implements SimbionService{
 	public List<SkemaBeasiswaAktifModel> selectAllListBeasiswa(){
 		log.info("Tampilkan semua data pengguna");
 		return simbionMapper.selectAllListBeasiswa();
+<<<<<<< HEAD
 	}
 	
 	@Override
 	public List<TempatWawancaraModel>selectAllTempatWawancara(){
 		log.info("Tampilkan semua tempat wawancara");
 		return simbionMapper.selectAllTempatWawancara();
+=======
+>>>>>>> lili
 	}
 	
 	@Override
@@ -37,10 +45,16 @@ public class SimbionServiceDatabase implements SimbionService{
 		log.info("Tampilkan detail beasiswa");
 		return simbionMapper.selectSkemaBeasiswa(no_urut);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public List<SyaratBeasiswaModel> selectSyaratBeasiswaByKode(int kode_beasiswa) {
 		log.info("Tampilkan list syarat beasiswa");
 		return simbionMapper.selectSyaratBeasiswaByKode(kode_beasiswa);
+=======
+	
+	public void insertIndividualDonor(IndividualDonorModel individualDonor) {
+		log.info("Mendaftarkan individual donatur");
+>>>>>>> lili
 	}
 }
