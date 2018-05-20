@@ -1,10 +1,13 @@
 package com.simbion.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
+import com.simbion.model.SkemaBeasiswaModel;
+import com.simbion.model.SyaratBeasiswaModel;
 import com.simbion.service.SimbionService;
 
 @Controller
@@ -22,6 +27,21 @@ public class SimbionController {
 	SimbionService simbionDAO;
 	
     //feature all user
+	@RequestMapping("/")
+    public String index (Model model)
+    {
+		List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
+		
+		model.addAttribute("beasiswaAktif", beasiswaAktif);
+		return "index";
+    }	
+    
+    @RequestMapping("/login")
+    public String login ()
+    {
+        return "form-login";
+    }
+    
     @RequestMapping("/register")
     public String register()
     {
@@ -52,9 +72,13 @@ public class SimbionController {
         return "view-pengumuman";
     }
     
-    @RequestMapping("/view-detail-skema")
-    public String detail()
+    @RequestMapping("/view-detail-skema/{no_urut}")
+    public String detail(Model model,  @PathVariable(value= "no_urut")int no_urut)
     {
+    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	model.addAttribute("detailBeasiswa", detailBeasiswa);
+    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "view-detail-skema";
     }
     
