@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.simbion.dao.SimbionMapper;
+import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.SkemaBeasiswaModel;
@@ -22,12 +23,14 @@ public class SimbionServiceDatabase implements SimbionService{
 	public List<SkemaBeasiswaAktifModel> selectAllListBeasiswa(){
 		log.info("Tampilkan semua data pengguna");
 		return simbionMapper.selectAllListBeasiswa();
-		
-	
 	}
 	
 	public SkemaBeasiswaModel selectSkemaBeasiswa(int no_urut) {
 		log.info("Tampilkan detail beasiswa");
 		return simbionMapper.selectSkemaBeasiswa(no_urut);
+	}
+	
+	public void insertIndividualDonor(IndividualDonorModel individualDonor) {
+		log.info("Mendaftarkan individual donatur");
 	}
 }
