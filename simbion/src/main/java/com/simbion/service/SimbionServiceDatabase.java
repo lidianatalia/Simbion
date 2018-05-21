@@ -134,4 +134,9 @@ public class SimbionServiceDatabase implements SimbionService{
 	public List<PendaftaranModel> selectPendaftaranByDonatur(int kode_skema_beasiswa, int no_urut) {
 		return simbionMapper.selectPendaftaranByDonatur(kode_skema_beasiswa, no_urut);
 	}
+
+	@Override
+	public void insertTempatWawancara(TempatWawancaraModel tempatWawancara) {
+		simbionMapper.insertTempatWawancara(tempatWawancara);
+	}
 }

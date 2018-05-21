@@ -262,7 +262,7 @@ public class SimbionController {
     {
     	return "/donatur/form-pembayaran-tambah";
     }
-       
+    
     @RequestMapping("/donatur/view-beasiswa")
     public String viewBeasiswa (Model model)
     {
@@ -310,6 +310,15 @@ public class SimbionController {
     public String form_pengumuman()
     {
         return "/admin/form-pengumuman-add";
+    }
+    
+    @RequestMapping(value="/admin/tempat-wawancara/submit", method=RequestMethod.POST)
+    public String register_tempat(
+    		@ModelAttribute("tempatWawancara") TempatWawancaraModel tempatWawancara, Model model)
+    {
+    	simbionDAO.insertTempatWawancara(tempatWawancara);
+    	model.addAttribute("tempatWawancara",tempatWawancara);
+        return "/admin/success-add";
     }
     
     @RequestMapping("/admin/view-detail-skema/{no_urut}")

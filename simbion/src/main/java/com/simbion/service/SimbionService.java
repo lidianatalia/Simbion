@@ -36,4 +36,5 @@ public interface SimbionService {
 	List<PendaftaranModel> selectPendaftar();
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	void insertPengumuman(PengumumanModel pengumuman);
+	void insertTempatWawancara(TempatWawancaraModel tempatWawancara);
 }
