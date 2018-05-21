@@ -38,7 +38,7 @@
               <tbody>
                  <tr th:each="info,iterationStatus: ${pengumuman}">
    					<td th:text="${info.tanggal}"></td>
-					<td><a class="nav-link" href="'/view-pengumuman/' + ${info.judul}" data-rel="popup" th:text="${info.judul}"></a></td>
+					<td><a class="nav-link" th:href="'/view-pengumuman/' + ${info.judul}" data-rel="popup" th:text="${info.judul}"></a></td>
    					<td th:text="${info.username}"></td>
    				</tr>
               </tbody>

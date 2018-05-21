@@ -92,7 +92,7 @@ public interface SimbionMapper {
 	List<PengumumanModel> selectAllPengumuman();
 	
 	@Select("select judul, kode_skema_beasiswa, no_urut_skema_beasiswa_aktif, username, tanggal, isi\r\n" + 
-			"from pengumuman")
+			"from pengumuman where judul = #{judul}")
 	PengumumanModel viewPengumuman(String judul);
 	
 	@Insert("insert INTO pembayaran (urutan, kode_skema_beasiswa, "
