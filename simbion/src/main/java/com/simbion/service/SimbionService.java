@@ -33,15 +33,14 @@ public interface SimbionService {
 	void insertIndividualDonor(IndividualDonorModel individualDonor);
 	void insertYayasan(YayasanModel yayasan);
 	void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa);
-<<<<<<< HEAD
+	
 	void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif);
 	void insertPembayaran(PembayaranModel pembayaran);
 	List<SkemaBeasiswaAktifModel> selectBeasiswaDonatur();
 	List<PendaftaranModel> selectPendaftar();
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	void insertPengumuman(PengumumanModel pengumuman);
-=======
+	
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syaratBeasiswa);
->>>>>>> 2ebec7a119b900ed77754be5cf95fd84e608eb2f
 	
 }

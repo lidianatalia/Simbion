@@ -222,7 +222,6 @@ public class SimbionController {
     	return "/donatur/form-skema-beasiswa-add";
     }
     
-<<<<<<< HEAD
     @RequestMapping(value="/donatur/form-skema-tambah/simpan", method=RequestMethod.POST)
     public String tambah_skema(
     		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
@@ -238,7 +237,8 @@ public class SimbionController {
     	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
     	model.addAttribute("syarat", syarat);
     		return "success-add-skema";
-=======
+    }
+
     @RequestMapping(value="/donatur/skema/submit", method=RequestMethod.POST)
     public String register_skema(
     		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
@@ -255,7 +255,6 @@ public class SimbionController {
     	model.addAttribute("skemaBeasiswa",skemaBeasiswa);
     	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
         return "/donatur/success-add";
->>>>>>> 2ebec7a119b900ed77754be5cf95fd84e608eb2f
     }
     
     @RequestMapping("/donatur/form-beasiswa-tambah")

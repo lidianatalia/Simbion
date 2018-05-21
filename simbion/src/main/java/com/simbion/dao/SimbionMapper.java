@@ -128,14 +128,13 @@ public interface SimbionMapper {
 			+ "#{npm}, #{keterangan}, #{tgl_bayar}, #{nominal})")
 	void insertPembayaran(PembayaranModel pembayaran);
 	
-<<<<<<< HEAD
 	@Insert("insert INTO syarat_beasiswa (kode_beasiswa, syarat) values (#{kode_beasiswa}, #{syarat})")
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	
 	@Insert("insert INTO pengumuman (tanggal, no_urut_skema_beasiswa_aktif, kode_skema_beasiswa, username, judul, isi) "
 			+ "values ('2017-04-19' , 6, 1002,  'clemens.sullivan', #{judul}, #{isi})")
 	void insertPengumuman(PengumumanModel pengumuman);
-=======
+	
 	@Update("update Pendaftaran set status_terima =#{status_terima} where kode_skema_beasiswa=#{kode_skema_beasiswa}"
 			+ "and no_urut=#{no_urut} and npm=#{npm}")
 	void updatePendaftaran(PendaftaranModel pendaftaran, @Param("status_terima")String status_terima,
