@@ -5,7 +5,10 @@ import java.util.List;
 import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
+<<<<<<< HEAD
 import com.simbion.model.PembayaranModel;
+=======
+>>>>>>> 2ebec7a119b900ed77754be5cf95fd84e608eb2f
 import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
@@ -18,8 +21,10 @@ import com.simbion.model.SyaratBeasiswaModel;
 public interface SimbionService {
 	List<TempatWawancaraModel>selectAllTempatWawancara();
 	List<SkemaBeasiswaAktifModel> selectAllListBeasiswa();
+	List<SkemaBeasiswaAktifModel> selectListBeasiswaByDonatur(String nomor_identitas_donatur);
 	List<SyaratBeasiswaModel>selectSyaratBeasiswaByKode(int kode_beasiswa);
 	List<PengumumanModel>selectAllPengumuman();
+	List<PendaftaranModel>selectPendaftaranByDonatur(int kode_skema_beasiswa, int no_urut);
 	SkemaBeasiswaModel selectSkemaBeasiswa(int no_urut);
 	PengumumanModel viewPengumuman(String judul);
 	void insertMahasiswa(MahasiswaModel mahasiswa);
@@ -28,11 +33,15 @@ public interface SimbionService {
 	void insertIndividualDonor(IndividualDonorModel individualDonor);
 	void insertYayasan(YayasanModel yayasan);
 	void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa);
+<<<<<<< HEAD
 	void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif);
 	void insertPembayaran(PembayaranModel pembayaran);
 	List<SkemaBeasiswaAktifModel> selectBeasiswaDonatur();
 	List<PendaftaranModel> selectPendaftar();
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	void insertPengumuman(PengumumanModel pengumuman);
+=======
+	void insertSyaratBeasiswa(SyaratBeasiswaModel syaratBeasiswa);
+>>>>>>> 2ebec7a119b900ed77754be5cf95fd84e608eb2f
 	
 }

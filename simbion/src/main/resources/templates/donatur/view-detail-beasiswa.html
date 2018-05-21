@@ -40,14 +40,14 @@
                 </tr>
               </thead>
               <tbody>
-                 <tr>
-   					<td >1</td>
-   					<td >Andi</td>
-   					<td >123456</td>
-   					<td >31 April 2018</td>
-   					<td >Tidak Aktif</td>
-   					<td><a class="nav-link" href="/donatur/view-detail-beasiswa" data-rel="popup"><button type="button" class="btn btn-success">Terima</button></a>
-   					<a class="nav-link" href="/donatur/view-detail-beasiswa" data-rel="popup"><button type="button" class="btn btn-danger">Tolak</button></a></td>
+                 <tr th:each="info,iterationStatus: ${pendaftaran}">
+   					<td th:text="${info.no_urut}"></td>
+   					<td th:text="${info.nama}"></td>
+   					<td th:text="${info.npm}"></td>
+   					<td th:text="${info.waktu_daftar}"></td>
+   					<td th:text="${info.status_terima}"></td>
+   					<td><a class="nav-link" href="'/donatur/status-terima/' + ${beasiswa.kode_skema_beasiswa} +'/'+${beasiswa.no_urut} + '/'+${beasiswa.npm}" data-rel="popup"><button type="button" class="btn btn-success">Terima</button></a>
+   					<a class="nav-link" href="'/donatur/status-tolak/' + ${beasiswa.kode_skema_beasiswa} +'/'+${beasiswa.no_urut} + '/'+${beasiswa.npm}" data-rel="popup"><button type="button" class="btn btn-danger">Tolak</button></a></td>
    				</tr>
               </tbody>
             </table>
