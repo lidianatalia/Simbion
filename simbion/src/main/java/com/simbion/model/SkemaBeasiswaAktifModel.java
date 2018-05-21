@@ -24,4 +24,5 @@ public class SkemaBeasiswaAktifModel {
 	private int total_pembayaran;
 	
 	private String nama;
+	private String syarat;
 }
