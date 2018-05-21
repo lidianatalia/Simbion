@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.simbion.model.DonaturModel;
+import com.simbion.model.IndividualDonorModel;
+import com.simbion.model.MahasiswaModel;
+import com.simbion.model.PenggunaModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
+import com.simbion.model.YayasanModel;
 import com.simbion.model.SkemaBeasiswaModel;
 import com.simbion.model.SyaratBeasiswaModel;
 import com.simbion.service.SimbionService;
@@ -43,9 +48,21 @@ public class SimbionController {
     }
     
     @RequestMapping("/register")
-    public String register()
+    public String register(@ModelAttribute("mahasiswa") MahasiswaModel mahasiswa, Model model)
     {
         return "form-register";
+    }
+    
+    @RequestMapping(value="/register/submit", method=RequestMethod.POST)
+    public String register_submit(
+    		@ModelAttribute("mahasiswa") MahasiswaModel mahasiswa, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
+    {
+    	simbionDAO.insertPengguna(pengguna);
+    	simbionDAO.insertMahasiswa(mahasiswa);
+    	model.addAttribute("mahasiswa",mahasiswa);
+        return "success-add";
     }
     
     @RequestMapping("/register-individual")
@@ -54,10 +71,41 @@ public class SimbionController {
         return "form-register-individual";
     }
     
+    @RequestMapping(value="/register/individual/submit", method=RequestMethod.POST)
+    public String register_submit_i(
+    		@ModelAttribute("individual_donor") IndividualDonorModel individualDonor, 
+    		@ModelAttribute("donatur") DonaturModel donatur, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
+    {
+    	simbionDAO.insertPengguna(pengguna);
+    	donatur.setNomor_identitas(individualDonor.getNomor_identitas_donatur());
+    	simbionDAO.insertDonatur(donatur);
+    	simbionDAO.insertIndividualDonor(individualDonor);
+    	model.addAttribute("individualDonor",individualDonor);
+        return "success-add";
+    }
+    
     @RequestMapping("/register-yayasan")
     public String register_y()
     {
         return "form-register-yayasan";
+    }
+    
+    @RequestMapping(value="/register/yayasan/submit", method=RequestMethod.POST)
+    public String register_submit_y(
+    		@ModelAttribute("yayasan") YayasanModel yayasan, 
+    		@ModelAttribute("donatur") DonaturModel donatur, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
+    {
+    	simbionDAO.insertPengguna(pengguna);
+    	donatur.setNo_telp(yayasan.getNo_telp_cp());
+    	simbionDAO.insertDonatur(donatur);
+    	yayasan.setNomor_identitas_donatur(donatur.getNomor_identitas());
+    	simbionDAO.insertYayasan(yayasan);
+    	model.addAttribute("yayasan",yayasan);
+        return "success-add";
     }
     
     @RequestMapping("/viewall-pengumuman")

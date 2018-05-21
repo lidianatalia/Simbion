@@ -19,4 +19,5 @@ public class MahasiswaModel {
 	private String no_rekening;
 	private String nama_pemilik;
 	private String username;
+	private String password;
 }

@@ -6,20 +6,18 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
 import com.simbion.model.PembayaranModel;
 import com.simbion.model.PendaftaranModel;
+import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.SkemaBeasiswaModel;
-<<<<<<< HEAD
 import com.simbion.model.SyaratBeasiswaModel;
-=======
-import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.YayasanModel;
->>>>>>> lili
 
 @Mapper
 public interface SimbionMapper {
@@ -38,29 +36,33 @@ public interface SimbionMapper {
 			"where sb.kode = sba.kode_skema_beasiswa and no_urut = #{no_urut}")
 	SkemaBeasiswaModel selectSkemaBeasiswa(int no_urut);
 	
-<<<<<<< HEAD
 	@Select ("select * from syarat_beasiswa where kode_beasiswa=#{kode_beasiswa}")
 	List<SyaratBeasiswaModel> selectSyaratBeasiswaByKode(int kode_beasiswa);
-=======
+
 	@Insert("insert INTO mahasiswa ("
-			+ "username, password, npm, email, nama, no_telp, "
+			+ "username, npm, email, nama, no_telp, "
 			+ "alamat_tinggal, alamat_domisili, nama_bank, no_rekening, nama_pemilik)"
 			+ "values ("
-			+ "#{username},#{password},#{npm},#{email},#{nama},#{no_telp},"
+			+ "#{username},#{npm},#{email},#{nama},#{no_telp},"
 			+ "#{alamat_tinggal}, #{alamat_domisili},#{nama_bank}, #{no_rekening}, #{nama_pemilik})")
 	void insertMahasiswa(MahasiswaModel mahasiswa);
 	
-	@Insert("insert INTO individual_donor ("
-			+ "username, password, nomor_identitas, nik, email, nama, npwp, no_telp, alamat) "
-			+ "values (#{username}, #{password}, #{nomor_identitas}, #{nik}, #{email}, #{nama},"
-			+ "#{npwp}, #{no_telp}, #{alamat}")
+	@Insert("insert INTO individual_donor("
+			+ "nik, nomor_identitas_donatur)"
+			+ "values (#{nik}, #{nomor_identitas_donatur})")
 	void insertIndividualDonor(IndividualDonorModel individualDonor);
 	
-	@Insert("insert INTO yayasan (username, password, nomor_identitas, "
-			+ "no_sk_yayasan, email, nama, no_telp_cp, npwp, alamat) "
-			+ "values (#{username}, #{password}, #{nomor_identitas}, #{no_sk_yayasan}, #{email}, "
-			+ "#{nama}, #{no_telp_cp}, #{npwpw}, #{alamat})")
+	@Insert("insert INTO yayasan (no_sk_yayasan, email, nama, no_telp_cp, nomor_identitas_donatur) "
+			+ "values (#{no_sk_yayasan}, #{email},#{nama}, #{no_telp_cp}, #{nomor_identitas_donatur})")
 	void insertYayasan(YayasanModel yayasan);
+	
+	@Insert("insert INTO donatur ("
+			+ "nomor_identitas, email, nama, npwp, no_telp, alamat,username) "
+			+ "values (#{nomor_identitas}, #{email}, #{nama}, #{npwp}, #{no_telp}, #{alamat},#{username})")
+	void insertDonatur(DonaturModel donatur);
+	
+	@Insert("insert INTO pengguna(username,password) values (#{username},#{password})")
+	void insertPengguna(PenggunaModel pengguna);
 	
 	@Insert("insert INTO skema_beasiswa (kode, nama, jenis, deskripsi, syarat) "
 			+ "values (#{kode}, #{nama}, #{jenis}, #{deskripsi}, #{syarat})")
@@ -98,5 +100,4 @@ public interface SimbionMapper {
 			+ "values (#{urutan}, #{kode_skema_beasiswa}, #{no_urut_skema_beasiswa_aktif},"
 			+ "#{npm}, #{keterangan}, #{tgl_bayar}, #{nominal})")
 	void insertPembayaran(PembayaranModel pembayaran);
->>>>>>> lili
 }
