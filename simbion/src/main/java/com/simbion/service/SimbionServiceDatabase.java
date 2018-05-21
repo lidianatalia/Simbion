@@ -9,6 +9,7 @@ import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
 import com.simbion.model.PenggunaModel;
+import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.YayasanModel;
@@ -34,6 +35,12 @@ public class SimbionServiceDatabase implements SimbionService{
 	public List<TempatWawancaraModel>selectAllTempatWawancara(){
 		log.info("Tampilkan semua tempat wawancara");
 		return simbionMapper.selectAllTempatWawancara();
+	}
+	
+	@Override
+	public PengumumanModel viewPengumuman(String judul) {
+		log.info("Tampilkan detail pengumuman");
+		return simbionMapper.viewPengumuman(judul);
 	}
 	
 	@Override
@@ -71,4 +78,12 @@ public class SimbionServiceDatabase implements SimbionService{
 	public void insertDonatur(DonaturModel donatur) {
 		simbionMapper.insertDonatur(donatur);
 	}
+
+	@Override
+	public List<PengumumanModel> selectAllPengumuman() {
+		log.info("Tampilkan list pengumuman");
+		return simbionMapper.selectAllPengumuman();
+	}
+	
+	
 }

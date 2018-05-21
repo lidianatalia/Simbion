@@ -88,12 +88,12 @@ public interface SimbionMapper {
 	@Insert("insert INTO tempat_wawancara (kode, nama, lokasi) values (#{kode}, #{nama}, #{lokasi})")
 	void insertTempatWawancara(TempatWawancaraModel tempatWawancara);
 	
-	@Select("select tanggal, judul, username as pembuat from pengumuman")
-	List<PengumumanModel> selectPengumuman();
+	@Select("select tanggal, judul, username from pengumuman")
+	List<PengumumanModel> selectAllPengumuman();
 	
 	@Select("select judul, kode_skema_beasiswa, no_urut_skema_beasiswa_aktif, username, tanggal, isi\r\n" + 
 			"from pengumuman")
-	List<PengumumanModel> viewPengumuman(String judul);
+	PengumumanModel viewPengumuman(String judul);
 	
 	@Insert("insert INTO pembayaran (urutan, kode_skema_beasiswa, "
 			+ "no_urut_skema_beasiswa_aktif, npm, keterangan, tgl_bayar, nominal) "

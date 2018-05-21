@@ -18,6 +18,7 @@ import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
 import com.simbion.model.PenggunaModel;
+import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.YayasanModel;
@@ -36,7 +37,6 @@ public class SimbionController {
     public String index (Model model)
     {
 		List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
-		
 		model.addAttribute("beasiswaAktif", beasiswaAktif);
 		return "index";
     }	
@@ -109,15 +109,19 @@ public class SimbionController {
     }
     
     @RequestMapping("/viewall-pengumuman")
-    public String viewall_pengumuman()
+    public String viewall_pengumuman(Model model)
     {
-        return "viewall-pengumuman";
+    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
+    	model.addAttribute("pengumuman",pengumuman);
+    	return "viewall-pengumuman";
     }
     
-    @RequestMapping("/view-pengumuman")
-    public String view_pengumuman()
+    @RequestMapping("/view-pengumuman/{judul}")
+    public String view_pengumuman(Model model, @PathVariable(value="judul")String judul)
     {
-        return "view-pengumuman";
+    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
+    	model.addAttribute("detailPengumuman",detailPengumuman);
+    	return "view-pengumuman";
     }
     
     @RequestMapping("/view-detail-skema/{no_urut}")
@@ -138,8 +142,10 @@ public class SimbionController {
     }
     
     @RequestMapping("/mhs/viewall-pengumuman")
-    public String viewall_pengumuman_mhs()
+    public String viewall_pengumuman_mhs(Model model)
     {
+    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
+    	model.addAttribute("pengumuman",pengumuman);
         return "/mhs/viewall-pengumuman";
     }
     
