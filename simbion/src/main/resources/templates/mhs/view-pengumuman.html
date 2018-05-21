@@ -27,10 +27,9 @@
             <h5>Pengumuman Hasil Beasiswa Aktif</h5>
           </div>
           <div class="widget-content">
-			<h3>Beasiswa S2 University of Edinburgh - 1001</h3>
-			<h5>Beasiswa Prestasi dibuat oleh 122214894851</h5>
-			<h5>[merupakan batuan basiswa terhadap mahasiswa yang berprestasi]</h5>
-			<h5>Syarat Beasiswa : Minimal IPS=3.3</h5>
+			<h3 th:text="${detailPengumuman.judul} + ' - ' + ${detailPengumuman.kode_skema_beasiswa} + ' - ' +${detailPengumuman.no_urut_skema_beasiswa_aktif}"></h3>
+			<h5 th:text="'ditulis oleh : ' + ${detailPengumuman.username} + ' tanggal ' + ${detailPengumuman.tanggal}"></h5>
+			<h5 th:text="${detailPengumuman.isi}"></h5>
           </div>
         </div>
       </div>

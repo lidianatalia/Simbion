@@ -136,8 +136,10 @@ public class SimbionController {
     
     //feature mhs
     @RequestMapping("/mhs")
-    public String index_mhs ()
+    public String index_mhs (Model model)
     {
+    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
+		model.addAttribute("beasiswaAktif", beasiswaAktif);
 		return "/mhs/index";
     }
     
@@ -149,28 +151,36 @@ public class SimbionController {
         return "/mhs/viewall-pengumuman";
     }
     
-    @RequestMapping("/mhs/view-pengumuman")
-    public String view_pengumuman_mhs()
+    @RequestMapping("/mhs/view-pengumuman/{judul}")
+    public String view_pengumuman_mhs(Model model, @PathVariable(value="judul")String judul)
     {
-        return "/mhs/view-pengumuman";
+    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
+    	model.addAttribute("detailPengumuman",detailPengumuman);
+    	return "/mhs/view-pengumuman";
     }
     
     @RequestMapping("/mhs/form-daftar-beasiswa")
     public String addBeasiswa ()
     {
-        return "mhs/form-daftar-beasiswa";
+        return "/mhs/form-daftar-beasiswa";
     }
     
-    @RequestMapping("/mhs/view-detail-skema")
-    public String detail_mhs()
+    @RequestMapping("/mhs/view-detail-skema/{no_urut}")
+    public String detail_mhs(Model model,  @PathVariable(value= "no_urut")int no_urut)
     {
+    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	model.addAttribute("detailBeasiswa", detailBeasiswa);
+    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "/mhs/view-detail-skema";
     }
     
     //feature donatur
     @RequestMapping("/donatur")
-    public String index_donatur ()
+    public String index_donatur (Model model)
     {
+    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
+		model.addAttribute("beasiswaAktif", beasiswaAktif);
 		return "/donatur/index";
     }
     
@@ -181,15 +191,19 @@ public class SimbionController {
     }
     
     @RequestMapping("/donatur/viewall-pengumuman")
-    public String viewall_pengumuman_donatur()
+    public String viewall_pengumuman_donatur(Model model)
     {
+    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
+    	model.addAttribute("pengumuman",pengumuman);
         return "/donatur/viewall-pengumuman";
     }
     
-    @RequestMapping("/donatur/view-pengumuman")
-    public String view_pengumuman_donatur()
+    @RequestMapping("/donatur/view-pengumuman/{judul}")
+    public String view_pengumuman_donatur(Model model, @PathVariable(value="judul")String judul)
     {
-        return "/donatur/view-pengumuman";
+    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
+    	model.addAttribute("detailPengumuman",detailPengumuman);
+    	return "/donatur/view-pengumuman";
     }
     
     @RequestMapping("/donatur/form-skema-tambah")
@@ -222,9 +236,13 @@ public class SimbionController {
         return "/donatur/view-detail-beasiswa";
     }
     
-    @RequestMapping("/donatur/view-detail-skema")
-    public String detail_donatur()
+    @RequestMapping("/donatur/view-detail-skema/{no_urut}")
+    public String detail_donatur(Model model,  @PathVariable(value= "no_urut")int no_urut)
     {
+    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	model.addAttribute("detailBeasiswa", detailBeasiswa);
+    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "/donatur/view-detail-skema";
     }
     

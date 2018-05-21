@@ -39,13 +39,14 @@
                 </tr>
               </thead>
               <tbody>
-                 <tr >
-   					<td >1</td>
-   					<td >Beasiswa S2 Tanoto</td>
-   					<td >31 April 2018</td>
-   					<td >Ditutup</td>
-   					<td >15</td>
-   					<td><a href ="/donatur/view-detail-skema"><button type="button" class="btn btn-info" >Detail</button></a></td>
+                 <tr th:each="beasiswa,iterationStatus: ${beasiswaAktif}">
+   					<td th:text="${beasiswa.no_urut}"></td>
+   					<td th:text="${beasiswa.nama}"></td>
+   					<td th:text="${beasiswa.tgl_tutup_pendaftaran}"></td>
+   					<td th:text="${beasiswa.status}"></td>
+   					<td th:text="${beasiswa.jumlah_pendaftar}"></td>
+   					<td><a th:href="'/donatur/view-detail-skema/'+ ${beasiswa.no_urut}"><button type="button" class="btn btn-info" >
+   					Detail</button></a></td>
    				</tr>
               </tbody>
             </table>
