@@ -37,4 +37,6 @@ public interface SimbionService {
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	void insertPengumuman(PengumumanModel pengumuman);
 	void insertTempatWawancara(TempatWawancaraModel tempatWawancara);
+	void updatePendaftaranA(int kode_skema_beasiswa, int no_urut, String npm);
+	void updatePendaftaranR(int kode_skema_beasiswa, int no_urut, String npm);
 }

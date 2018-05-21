@@ -45,6 +45,11 @@ public class SimbionController {
 		return "index";
     }	
     
+	@RequestMapping("/login")
+	public String login() {
+		return "form-login";
+	}
+	
     @RequestMapping("/register")
     public String register(@ModelAttribute("mahasiswa") MahasiswaModel mahasiswa, Model model)
     {
@@ -290,7 +295,6 @@ public class SimbionController {
     	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "/donatur/view-detail-skema";
     }
-    
     
     //feature admin
     @RequestMapping("/admin")

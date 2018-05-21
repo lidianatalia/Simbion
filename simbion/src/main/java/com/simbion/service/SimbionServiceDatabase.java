@@ -139,4 +139,14 @@ public class SimbionServiceDatabase implements SimbionService{
 	public void insertTempatWawancara(TempatWawancaraModel tempatWawancara) {
 		simbionMapper.insertTempatWawancara(tempatWawancara);
 	}
+
+	@Override
+	public void updatePendaftaranA(int kode_skema_beasiswa, int no_urut, String npm) {
+		simbionMapper.updatePendaftaranA(kode_skema_beasiswa,no_urut,npm);
+	}
+
+	@Override
+	public void updatePendaftaranR(int kode_skema_beasiswa, int no_urut, String npm) {
+		simbionMapper.updatePendaftaranR(kode_skema_beasiswa,no_urut,npm);
+	}
 }

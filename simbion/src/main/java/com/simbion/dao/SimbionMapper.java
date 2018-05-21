@@ -121,10 +121,20 @@ public interface SimbionMapper {
 	@Insert("insert INTO pengumuman (tanggal, no_urut_skema_beasiswa_aktif, kode_skema_beasiswa, username, judul, isi) "
 			+ "values ('2017-04-19' , 6, 1002,  'clemens.sullivan', #{judul}, #{isi})")
 	void insertPengumuman(PengumumanModel pengumuman);
-	@Update("update Pendaftaran set status_terima =#{status_terima} where kode_skema_beasiswa=#{kode_skema_beasiswa}"
+	
+	@Update("update Pendaftaran set status_terima ='diterima' where kode_skema_beasiswa=#{kode_skema_beasiswa}"
 			+ "and no_urut=#{no_urut} and npm=#{npm}")
-	void updatePendaftaran(PendaftaranModel pendaftaran, @Param("status_terima")String status_terima,
+	void updatePendaftaranA(
 			@Param("kode_skema_beasiswa")int kode_skema_beasiswa,
 			@Param("no_urut")int no_urut,
 			@Param("npm")String npm);
+	
+	@Update("update Pendaftaran set status_terima ='tidak diterima' where kode_skema_beasiswa=#{kode_skema_beasiswa}"
+			+ "and no_urut=#{no_urut} and npm=#{npm}")
+	void updatePendaftaranR(
+			@Param("kode_skema_beasiswa")int kode_skema_beasiswa,
+			@Param("no_urut")int no_urut,
+			@Param("npm")String npm);
+	
+	
 }
