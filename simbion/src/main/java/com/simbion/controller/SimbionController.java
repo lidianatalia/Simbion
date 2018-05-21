@@ -1,8 +1,10 @@
 package com.simbion.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -222,39 +224,50 @@ public class SimbionController {
     	return "/donatur/form-skema-beasiswa-add";
     }
     
-    @RequestMapping(value="/donatur/skema/submit", method=RequestMethod.POST)
-    public String register_skema(
-    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
-    		@ModelAttribute("syaratBeasiswa") SyaratBeasiswaModel syaratBeasiswa,  Model model)
+    @RequestMapping(value="/donatur/form-skema-tambah/simpan", method=RequestMethod.POST)
+    public String tambah_skema(
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
+    		@ModelAttribute("syarat") SyaratBeasiswaModel syarat,
+    		Model model)
     {
-    	String nomor_identitas="127150014474";
-    	skemaBeasiswa.setNomor_identitas_donatur(nomor_identitas);
     	simbionDAO.insertSkemaBeasiswa(skemaBeasiswa);
     	for (String datum: skemaBeasiswa.getSyarat().split("-")) {
-    		syaratBeasiswa.setKode_beasiswa(skemaBeasiswa.getKode());
-    		syaratBeasiswa.setSyarat(datum);
-    		simbionDAO.insertSyaratBeasiswa(syaratBeasiswa);
+    		syarat.setKode_beasiswa(skemaBeasiswa.getKode());
+    		syarat.setSyarat(datum);
+    		simbionDAO.insertSyaratBeasiswa(syarat);
     	}
-    	model.addAttribute("skemaBeasiswa",skemaBeasiswa);
-    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
-        return "/donatur/success-add";
+    	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
+    	model.addAttribute("syarat", syarat);
+    		return "success-add-skema";
     }
+
     
     @RequestMapping("/donatur/form-beasiswa-tambah")
-    public String add_beasiswa()
+    public String add_beasiswa(
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
+    		@ModelAttribute("syaratBeasiswa") SyaratBeasiswaModel syaratBeasiswa,
+    		Model model)
     {
     	return "/donatur/form-beasiswa-aktif-add";
     }
     
-    @RequestMapping(value="/donatur/form-beasiswa-aktif-add/simpan", method=RequestMethod.POST)
+    @RequestMapping(value="/donatur/form-beasiswa-tambah/simpan", method=RequestMethod.POST)
     public String add_beasiswa_aktif(
-    		@ModelAttribute("beasiswaAktif") SkemaBeasiswaAktifModel beasiswaAktif,
-    	    BindingResult userloginResult,
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaAktifModel beasiswaAktif,
+    		@ModelAttribute("syarat") SyaratBeasiswaModel syarat,
     		Model model)
     {
+    	beasiswaAktif.setTgl_tutup_pendaftaran(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    	
     	simbionDAO.insertSkemaBeasiswaAktif(beasiswaAktif);
-    	model.addAttribute("beasiswaAktif",beasiswaAktif);
-        return "success-add";
+    	for (String datum: beasiswaAktif.getSyarat().split("-")) {
+    		syarat.setKode_beasiswa(beasiswaAktif.getKode_skema_beasiswa());
+    		syarat.setSyarat(datum);
+    		simbionDAO.insertSyaratBeasiswa(syarat);
+    	}
+    	model.addAttribute("skemaBeasiswa", beasiswaAktif);
+    	model.addAttribute("syarat", syarat);
+        return "success-add-skema";
     }
     
     @RequestMapping("/donatur/form-pembayaran-tambah")

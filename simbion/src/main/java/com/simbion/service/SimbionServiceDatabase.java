@@ -8,7 +8,11 @@ import com.simbion.dao.SimbionMapper;
 import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
+
 import com.simbion.model.PembayaranModel;
+
+import com.simbion.model.PembayaranModel;
+
 import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
@@ -87,11 +91,12 @@ public class SimbionServiceDatabase implements SimbionService{
 		return simbionMapper.selectAllPengumuman();
 	}
 
+
 	@Override
 	public void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa) {
 		simbionMapper.insertSkemaBeasiswa(skemaBeasiswa);
 	}
-	
+		
 	@Override
 	public void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif) {
 		simbionMapper.insertSkemaBeasiswaAktif(skemaBeasiswaAktif);
