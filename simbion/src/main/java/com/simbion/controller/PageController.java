@@ -28,10 +28,7 @@
 //		return "form-login";
 //	}
 //	
-//	@RequestMapping("/")
-//	public String index() {
-//		return "redirect:/home";
-//	}
+//
 //	
 //	@RequestMapping("/home")
 //	public String home() {

@@ -8,6 +8,7 @@ import com.simbion.dao.SimbionMapper;
 import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
+import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
@@ -84,6 +85,27 @@ public class SimbionServiceDatabase implements SimbionService{
 		log.info("Tampilkan list pengumuman");
 		return simbionMapper.selectAllPengumuman();
 	}
+
+	@Override
+	public void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa) {
+		simbionMapper.insertSkemaBeasiswa(skemaBeasiswa);
+	}
 	
+	@Override
+	public void insertSyaratBeasiswa(SyaratBeasiswaModel syaratBeasiswa) {
+		simbionMapper.insertSyaratBeasiswa(syaratBeasiswa);
+	}
+
+	@Override
+	public List<SkemaBeasiswaAktifModel> selectListBeasiswaByDonatur(String nomor_identitas_donatur) {
+		log.info("Tampilkan list beasiswa");
+		return simbionMapper.selectListBeasiswaByDonatur(nomor_identitas_donatur);
+	}
+
+	@Override
+	public List<PendaftaranModel> selectPendaftaranByDonatur(int kode_skema_beasiswa, int no_urut) {
+		return simbionMapper.selectPendaftaranByDonatur(kode_skema_beasiswa, no_urut);
+	}
+
 	
 }

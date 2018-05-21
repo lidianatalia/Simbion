@@ -52,7 +52,6 @@
 //	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
 //	{
 //		auth.jdbcAuthentication().dataSource(dataSource)
-//		.passwordEncoder(NoOpPasswordEncoder.getInstance())
 //		.usersByUsernameQuery("SELECT username, password, '1' as enabled FROM pengguna where username=?")
 //		.authoritiesByUsernameQuery("SELECT username, role FROM pengguna WHERE username=?");
 //	}

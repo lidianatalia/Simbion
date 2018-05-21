@@ -1,5 +1,7 @@
 package com.simbion.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +18,5 @@ public class SkemaBeasiswaModel {
 	private String nomor_identitas_donatur;
 	
 	private int no_urut;
+	private String syarat;
 }
