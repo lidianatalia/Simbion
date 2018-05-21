@@ -272,8 +272,10 @@ public class SimbionController {
     
     //feature admin
     @RequestMapping("/admin")
-    public String index_admin ()
+    public String index_admin (Model model)
     {
+    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
+		model.addAttribute("beasiswaAktif", beasiswaAktif);
 		return "/admin/index";
     }
     @RequestMapping("/admin/form-tempat-wawancara-tambah")
@@ -287,17 +289,17 @@ public class SimbionController {
     {
         return "/admin/form-pengumuman-add";
     }
-    @RequestMapping("/admin/view-detail-skema")
-    public String detail_admin()
+    
+    @RequestMapping("/admin/view-detail-skema/{no_urut}")
+    public String detail_admin(Model model,  @PathVariable(value= "no_urut")int no_urut)
     {
+    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	model.addAttribute("detailBeasiswa", detailBeasiswa);
+    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "/admin/view-detail-skema";
     }
     
-    @RequestMapping("/admin/viewall-pengumuman")
-    public String viewall_pengumuman_admin()
-    {
-        return "/admin/viewall-pengumuman";
-    }
     
     @RequestMapping("/admin/viewall-tempat-wawancara")
     public String viewall_tempat_wawancara(Model model)
@@ -306,5 +308,21 @@ public class SimbionController {
     	model.addAttribute("tempat_wawancara",tempat_wawancara);
         
         return "/admin/viewall-tempat-wawancara";
+    }
+    
+    @RequestMapping("/admin/viewall-pengumuman")
+    public String viewall_pengumuman_admin(Model model)
+    {
+    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
+    	model.addAttribute("pengumuman",pengumuman);
+        return "/admin/viewall-pengumuman";
+    }
+    
+    @RequestMapping("/admin/view-pengumuman/{judul}")
+    public String view_pengumuman_admin(Model model, @PathVariable(value="judul")String judul)
+    {
+    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
+    	model.addAttribute("detailPengumuman",detailPengumuman);
+    	return "/admin/view-pengumuman";
     }
 }
