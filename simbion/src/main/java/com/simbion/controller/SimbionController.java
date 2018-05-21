@@ -222,6 +222,7 @@ public class SimbionController {
     	return "/donatur/form-skema-beasiswa-add";
     }
     
+<<<<<<< HEAD
     @RequestMapping(value="/donatur/form-skema-tambah/simpan", method=RequestMethod.POST)
     public String tambah_skema(
     		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
@@ -239,6 +240,8 @@ public class SimbionController {
     		return "success-add-skema";
     }
 
+=======
+>>>>>>> d57d318e81b2f2a2fbac5aaa5a9e5b301dc07af8
     @RequestMapping(value="/donatur/skema/submit", method=RequestMethod.POST)
     public String register_skema(
     		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
@@ -311,8 +314,10 @@ public class SimbionController {
     
     //feature admin
     @RequestMapping("/admin")
-    public String index_admin ()
+    public String index_admin (Model model)
     {
+    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
+		model.addAttribute("beasiswaAktif", beasiswaAktif);
 		return "/admin/index";
     }
     @RequestMapping("/admin/form-tempat-wawancara-tambah")
@@ -327,6 +332,15 @@ public class SimbionController {
         return "/admin/form-pengumuman-add";
     }
     
+    @RequestMapping("/admin/view-detail-skema/{no_urut}")
+    public String detail_admin(Model model,  @PathVariable(value= "no_urut")int no_urut)
+    {
+    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	model.addAttribute("detailBeasiswa", detailBeasiswa);
+    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
+    	return "/admin/view-detail-skema";
+    }
     @RequestMapping(value="/admin/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
     public String admin_add_pengumuman(
     		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
@@ -334,17 +348,6 @@ public class SimbionController {
     {
     	simbionDAO.insertPengumuman(pengumuman);
     	return "success-add-pengumuman";
-    }
-    @RequestMapping("/admin/view-detail-skema")
-    public String detail_admin()
-    {
-    	return "/admin/view-detail-skema";
-    }
-    
-    @RequestMapping("/admin/viewall-pengumuman")
-    public String viewall_pengumuman_admin()
-    {
-        return "/admin/viewall-pengumuman";
     }
     
     @RequestMapping("/admin/viewall-tempat-wawancara")
@@ -354,5 +357,21 @@ public class SimbionController {
     	model.addAttribute("tempat_wawancara",tempat_wawancara);
         
         return "/admin/viewall-tempat-wawancara";
+    }
+    
+    @RequestMapping("/admin/viewall-pengumuman")
+    public String viewall_pengumuman_admin(Model model)
+    {
+    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
+    	model.addAttribute("pengumuman",pengumuman);
+        return "/admin/viewall-pengumuman";
+    }
+    
+    @RequestMapping("/admin/view-pengumuman/{judul}")
+    public String view_pengumuman_admin(Model model, @PathVariable(value="judul")String judul)
+    {
+    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
+    	model.addAttribute("detailPengumuman",detailPengumuman);
+    	return "/admin/view-pengumuman";
     }
 }
