@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -186,6 +188,15 @@ public class SimbionController {
         return "/donatur/form-pengumuman-add";
     }
     
+    @RequestMapping(value="/donatur/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
+    public String add_pengumuman(
+    		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
+    		Model model)
+    {
+    	simbionDAO.insertPengumuman(pengumuman);
+    	return "success-add-pengumuman";
+    }
+    
     @RequestMapping("/donatur/viewall-pengumuman")
     public String viewall_pengumuman_donatur(Model model)
     {
@@ -233,6 +244,17 @@ public class SimbionController {
     public String add_beasiswa()
     {
     	return "/donatur/form-beasiswa-aktif-add";
+    }
+    
+    @RequestMapping(value="/donatur/form-beasiswa-aktif-add/simpan", method=RequestMethod.POST)
+    public String add_beasiswa_aktif(
+    		@ModelAttribute("beasiswaAktif") SkemaBeasiswaAktifModel beasiswaAktif,
+    	    BindingResult userloginResult,
+    		Model model)
+    {
+    	simbionDAO.insertSkemaBeasiswaAktif(beasiswaAktif);
+    	model.addAttribute("beasiswaAktif",beasiswaAktif);
+        return "success-add";
     }
     
     @RequestMapping("/donatur/form-pembayaran-tambah")
@@ -299,7 +321,14 @@ public class SimbionController {
     	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
     	return "/admin/view-detail-skema";
     }
-    
+    @RequestMapping(value="/admin/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
+    public String admin_add_pengumuman(
+    		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
+    		Model model)
+    {
+    	simbionDAO.insertPengumuman(pengumuman);
+    	return "success-add-pengumuman";
+    }
     
     @RequestMapping("/admin/viewall-tempat-wawancara")
     public String viewall_tempat_wawancara(Model model)

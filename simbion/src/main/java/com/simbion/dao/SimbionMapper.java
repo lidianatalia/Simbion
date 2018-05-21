@@ -78,16 +78,12 @@ public interface SimbionMapper {
 	@Insert("insert INTO pengguna(username,password) values (#{username},#{password})")
 	void insertPengguna(PenggunaModel pengguna);
 	
-	@Insert("insert INTO skema_beasiswa (kode, nama, jenis, deskripsi,nomor_identitas_donatur) "
-			+ "values (#{kode}, #{nama}, #{jenis}, #{deskripsi}, #{nomor_identitas_donatur})")
+	@Insert("insert INTO skema_beasiswa (kode, nama, jenis, deskripsi, nomor_identitas_donatur) "
+			+ "values (#{kode}, #{nama}, #{jenis}, #{deskripsi}, '126193489843')")
 	void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa);
 	
-	@Insert("insert INTO syarat_beasiswa (kode_beasiswa,syarat) "
-			+ "values (#{kode_beasiswa},#{syarat})")
-	void insertSyaratBeasiswa(SyaratBeasiswaModel syaratBeasiswa);
-	
-	@Insert("insert INTO skema_beasiswa_aktif (kode, no_urut, tgl_mulai_pendaftaran, tgl_tutup_pendaftaran) "
-			+ "values (#{kode}, #{no_urut}, #{tgl_mulai_pendaftaran}, #{tgl_tutup_pendaftaran})")
+	@Insert("insert INTO skema_beasiswa_aktif (kode_skema_beasiswa, no_urut, tgl_mulai_pendaftaran, tgl_tutup_pendaftaran) "
+			+ "values (#{kode_skema_beasiswa}, #{no_urut}, #{tgl_mulai_pendaftaran}, #{tgl_tutup_pendaftaran})")
 	void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif);
 	
 	@Insert("insert INTO pendaftaran (kode, npm, email, indeks_prestasi) "
@@ -98,7 +94,7 @@ public interface SimbionMapper {
 			+ "jumlah_pendaftar from skema_beasiswa_aktif where status = 'ditutup'")
 	List<SkemaBeasiswaAktifModel> selectBeasiswaDonatur();
 	
-	//menambahkan kolom pilih?
+	
 	@Select("select p.no_urut, m.nama, p.npm, p.waktu_daftar, p.status_daftar, pilih from mahasiswa m, pendaftaran p\r\n" + 
 			"where p.npm = m.npm and p.kode_skema_beasiswa = #{kode};")
 	List<PendaftaranModel> selectPendaftar();
@@ -119,6 +115,12 @@ public interface SimbionMapper {
 			+ "#{npm}, #{keterangan}, #{tgl_bayar}, #{nominal})")
 	void insertPembayaran(PembayaranModel pembayaran);
 	
+	@Insert("insert INTO syarat_beasiswa (kode_beasiswa, syarat) values (#{kode_beasiswa}, #{syarat})")
+	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
+	
+	@Insert("insert INTO pengumuman (tanggal, no_urut_skema_beasiswa_aktif, kode_skema_beasiswa, username, judul, isi) "
+			+ "values ('2017-04-19' , 6, 1002,  'clemens.sullivan', #{judul}, #{isi})")
+	void insertPengumuman(PengumumanModel pengumuman);
 	@Update("update Pendaftaran set status_terima =#{status_terima} where kode_skema_beasiswa=#{kode_skema_beasiswa}"
 			+ "and no_urut=#{no_urut} and npm=#{npm}")
 	void updatePendaftaran(PendaftaranModel pendaftaran, @Param("status_terima")String status_terima,
