@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -190,6 +192,15 @@ public class SimbionController {
         return "/donatur/form-pengumuman-add";
     }
     
+    @RequestMapping(value="/donatur/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
+    public String add_pengumuman(
+    		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
+    		Model model)
+    {
+    	simbionDAO.insertPengumuman(pengumuman);
+    	return "success-add-pengumuman";
+    }
+    
     @RequestMapping("/donatur/viewall-pengumuman")
     public String viewall_pengumuman_donatur(Model model)
     {
@@ -212,10 +223,38 @@ public class SimbionController {
     	return "/donatur/form-skema-beasiswa-add";
     }
     
+    @RequestMapping(value="/donatur/form-skema-tambah/simpan", method=RequestMethod.POST)
+    public String tambah_skema(
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
+    		@ModelAttribute("syarat") SyaratBeasiswaModel syarat,
+    		Model model)
+    {
+    	simbionDAO.insertSkemaBeasiswa(skemaBeasiswa);
+    	for (String datum: skemaBeasiswa.getSyarat().split("-")) {
+    		syarat.setKode_beasiswa(skemaBeasiswa.getKode());
+    		syarat.setSyarat(datum);
+    		simbionDAO.insertSyaratBeasiswa(syarat);
+    	}
+    	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
+    	model.addAttribute("syarat", syarat);
+    		return "success-add-skema";
+    }
+    
     @RequestMapping("/donatur/form-beasiswa-tambah")
     public String add_beasiswa()
     {
     	return "/donatur/form-beasiswa-aktif-add";
+    }
+    
+    @RequestMapping(value="/donatur/form-beasiswa-aktif-add/simpan", method=RequestMethod.POST)
+    public String add_beasiswa_aktif(
+    		@ModelAttribute("beasiswaAktif") SkemaBeasiswaAktifModel beasiswaAktif,
+    	    BindingResult userloginResult,
+    		Model model)
+    {
+    	simbionDAO.insertSkemaBeasiswaAktif(beasiswaAktif);
+    	model.addAttribute("beasiswaAktif",beasiswaAktif);
+        return "success-add";
     }
     
     @RequestMapping("/donatur/form-pembayaran-tambah")
@@ -262,6 +301,15 @@ public class SimbionController {
     public String form_pengumuman()
     {
         return "/admin/form-pengumuman-add";
+    }
+    
+    @RequestMapping(value="/admin/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
+    public String admin_add_pengumuman(
+    		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
+    		Model model)
+    {
+    	simbionDAO.insertPengumuman(pengumuman);
+    	return "success-add-pengumuman";
     }
     @RequestMapping("/admin/view-detail-skema")
     public String detail_admin()

@@ -8,6 +8,8 @@ import com.simbion.dao.SimbionMapper;
 import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
+import com.simbion.model.PembayaranModel;
+import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
@@ -83,6 +85,43 @@ public class SimbionServiceDatabase implements SimbionService{
 	public List<PengumumanModel> selectAllPengumuman() {
 		log.info("Tampilkan list pengumuman");
 		return simbionMapper.selectAllPengumuman();
+	}
+	
+	@Override
+	public void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa) {
+		simbionMapper.insertSkemaBeasiswa(skemaBeasiswa);
+	}
+	
+	@Override
+	public void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif) {
+		simbionMapper.insertSkemaBeasiswaAktif(skemaBeasiswaAktif);
+	}
+	
+	@Override
+	public void insertPembayaran(PembayaranModel pembayaran) {
+		simbionMapper.insertPembayaran(pembayaran);
+	}
+	
+	@Override
+	public List<SkemaBeasiswaAktifModel> selectBeasiswaDonatur(){
+		log.info("Tampilkan list beasiswa donatur");
+		return simbionMapper.selectBeasiswaDonatur();
+	}
+	
+	@Override
+	public List<PendaftaranModel> selectPendaftar(){
+		log.info("Tampilkan list pendaftar");
+		return simbionMapper.selectPendaftar();
+	}
+	
+	@Override
+	public void insertSyaratBeasiswa(SyaratBeasiswaModel syarat) {
+		simbionMapper.insertSyaratBeasiswa(syarat);
+	}
+	
+	@Override
+	public void insertPengumuman(PengumumanModel pengumuman) {
+		simbionMapper.insertPengumuman(pengumuman);
 	}
 	
 	

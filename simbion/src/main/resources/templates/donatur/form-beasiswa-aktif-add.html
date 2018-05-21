@@ -30,11 +30,11 @@
 				<h5>Menambah Beasiswa Dari Paket</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+				<form class="form-horizontal" method="post" action="/donatur/form-beasiswa-aktif-add/simpan" name="basic_validate" id="basic_validate" novalidate="novalidate">
 					<div class="control-group">
 						<label class="control-label">Kode Beasiswa</label>
 						<div class="controls">
-							<select class="select2-containername"  name="kode_beasiswa">
+							<select class="select2-containername"  name="kode_skema_beasiswa">
 								<option value="" selected="selected">--Pilih Jenis Beasiswa--</option>
 								<option value="prestasi">Beasiswa 0001</option>
 								<option value="bantuan">Beasiswa 0002</option>
@@ -51,7 +51,7 @@
 						<label class="control-label">Tanggal Mulai Pendaftaran</label>
 						<div class="controls">
 							<div data-date="1-05-2018" class="input-append date datepicker">
-								<input type="text" name="tgl_mulai" value="12-02-2012" data-date-format="dd-mm-yyyy" class="span11">
+								<input type="text" name="tgl_mulai_pendaftaran" value="12-02-2012" data-date-format="dd-mm-yyyy" class="span11">
 								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 						</div>	
@@ -60,7 +60,7 @@
 						<label class="control-label">Tanggal Tutup Pendaftaran</label>
 						<div class="controls">
 							<div data-date="1-05-2018" class="input-append date datepicker">
-								<input type="text" name="tgl_tutup" value="12-02-2012" data-date-format="dd-mm-yyyy" class="span11">
+								<input type="text" name="tgl_tutup_pendaftaran" value="12-02-2012" data-date-format="dd-mm-yyyy" class="span11">
 								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 						</div>	

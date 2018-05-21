@@ -5,6 +5,8 @@ import java.util.List;
 import com.simbion.model.DonaturModel;
 import com.simbion.model.IndividualDonorModel;
 import com.simbion.model.MahasiswaModel;
+import com.simbion.model.PembayaranModel;
+import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
@@ -25,5 +27,12 @@ public interface SimbionService {
 	void insertDonatur(DonaturModel donatur);
 	void insertIndividualDonor(IndividualDonorModel individualDonor);
 	void insertYayasan(YayasanModel yayasan);
+	void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa);
+	void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif);
+	void insertPembayaran(PembayaranModel pembayaran);
+	List<SkemaBeasiswaAktifModel> selectBeasiswaDonatur();
+	List<PendaftaranModel> selectPendaftar();
+	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
+	void insertPengumuman(PengumumanModel pengumuman);
 	
 }
