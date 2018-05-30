@@ -16,8 +16,7 @@ public class SkemaBeasiswaAktifModel {
 	private int kode_skema_beasiswa;
 	private int no_urut;
 	private Date tgl_mulai_pendaftaran;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private String tgl_tutup_pendaftaran;
+	private Date tgl_tutup_pendaftaran;
 	private String periode_penerimaan;
 	private String status;
 	private int jumlah_pendaftar;
@@ -25,4 +24,8 @@ public class SkemaBeasiswaAktifModel {
 	
 	private String nama;
 	private String syarat;
+
+	private String jenis;
+	private String deskripsi;
+	private String nomor_identitas_donatur;
 }

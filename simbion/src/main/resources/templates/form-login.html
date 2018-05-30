@@ -1,43 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-    
-<head>
-        <title>Portal Beasiswa Universitas X</title><meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html 	xmlns="http:www.w3.org/1999/xhtml" 
+		xmlns:th="http:www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>Login Page</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
         <link rel="stylesheet" href="/css/maruti-login.css" />
-    </head>
-    <body>
-        <div id="loginbox">
-    	    <div th:if="${param.error}">Invalid username and password.</div>
-			<div th:if="${param.logout}">You have been logged out.</div>
-                            
-            <form id="loginform" class="form-vertical" th-action="@{/login}" method="post">
-				 <div class="control-group normal_text"> <h3><font face="Helvetica" size="5">Portal Beasiswa Universitas X</font></h3></div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
-                            <span class="add-on"><i class="icon-user"></i></span><input type="text" placeholder="Username" name="username" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
-                            <span class="add-on"><i class="icon-lock"></i></span><input type="password" placeholder="Password" name="password" required />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <span class="pull-left"><a href="/register" class="flip-link btn btn-inverse" id="to-recover">Mendaftar?</a></span>
-                    <span class="pull-right"><button type="submit" class="btn btn-success">Login</button></span>
-                </div>
-            </form>
-        </div>
-        
-        <script src="/js/jquery.min.js"></script>  
-        <script src="/js/maruti.login.js"></script> 
-    </body>
-
+	</head>
+	<body>
+		<div th:if = "${param.error}">
+			Invalid username and password.
+		</div>
+		<div th:if = "${param.logout}">
+			You have been logged out.
+		</div>
+		<div id="loginbox">
+			<form th:action="@{/login}" method = "post">			
+				<div class="control-group normal_text"> <h3><font face="Helvetica" size="5">Portal Beasiswa Universitas X</font></h3></div>
+	            <div class="control-group">
+	                <div class="controls">
+	                    <div class="main_input_box">
+	                        <span class="add-on"><i class="icon-user"></i></span><input type="text" placeholder="Username" name="username" required/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="control-group">
+	                <div class="controls">
+	                    <div class="main_input_box">
+	                        <span class="add-on"><i class="icon-lock"></i></span><input type="password" placeholder="Password" name="password" required />
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="form-actions">
+	                <span class="pull-left"><a href="/register" class="flip-link btn btn-inverse" id="to-recover">Mendaftar?</a></span>
+	                <span class="pull-right"><input type="submit" value="Login" class="btn btn-success"></span>
+	                <span><a href="/" class="flip-link btn btn-link" id="to-recover">Beranda</a></span>
+	            </div>
+			</form>
+		</div>	
+	</body>
 </html>

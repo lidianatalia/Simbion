@@ -24,7 +24,12 @@
 			<!--top-Header-menu-->
 			<div id="user-nav" class="navbar navbar-inverse">
 			  <ul class="nav">
-			    <li class=""><a title="" href="/login"><i class="icon icon-user"></i> <span class="text">Login</span></a></li>
+  			    <li class="" th:if="${#httpServletRequest.isUserInRole('DONATUR') || #httpServletRequest.isUserInRole('ADMIN') || #httpServletRequest.isUserInRole('MAHASISWA')}">
+  			    <form th:action="@{/logout}" method="post">
+					<input type="submit" value="Logout"/>
+				</form>
+  			    </li>
+			    <li class="" th:unless="${#httpServletRequest.isUserInRole('DONATUR') || #httpServletRequest.isUserInRole('ADMIN') || #httpServletRequest.isUserInRole('MAHASISWA')}"><a title="" href="/login"><i class="icon icon-user"></i> <span class="text">Login</span></a></li>
 			  </ul>
 			</div>
 			<div id="search">
@@ -36,6 +41,17 @@
 			<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
 			  <ul>
 			    <li class="active"><a href="/"><i class="icon icon-home"></i> <span>Beranda</span></a> </li>
+			    <li th:if="${#httpServletRequest.isUserInRole('MAHASISWA')}" ><a href="/form-daftar-beasiswa"><i class="icon icon-edit"></i> <span>Daftar Beasiswa</span></a> </li>		  	
+			  	<li th:if="${#httpServletRequest.isUserInRole('ADMIN')}" ><a href="/tempat-wawancara/add"><i class="icon icon-pencil"></i> <span>Membuat Tempat Wawancara</span></a></li>
+			  	<li th:if="${#httpServletRequest.isUserInRole('ADMIN')}" ><a href="/viewall-tempat-wawancara"><i class="icon icon-book"></i> <span>Lihat Tempat Wawancara</span></a></li>
+			  	<li class="submenu" th:if="${#httpServletRequest.isUserInRole('DONATUR')}"> <a href="#"><i class="icon icon-book"></i> <span>Membuat Beasiswa Baru</span><span >&#9660</span></a>
+			      <ul>
+			        <li><a href="/form-skema-tambah">Membuat Paket Beasiswa</a></li>
+			        <li><a href="/form-beasiswa-tambah">Menambah Beasiswa Dari Paket</a></li>
+			      </ul>
+			    </li>
+			    <li th:if="${#httpServletRequest.isUserInRole('DONATUR')}"> <a href="/form-pembayaran-tambah"><i class="icon icon-folder-close"></i> <span>Laporan Pembayaran</span></a> </li>
+			    <li th:if="${#httpServletRequest.isUserInRole('DONATUR')}"><a href="/view-beasiswa"><i class="icon icon-list-alt"></i> <span>Lihat Beasiswa Saya</span></a></li>
 			    <li><a href="/viewall-pengumuman"><i class="icon icon-bullhorn"></i> <span>Lihat Pengumuman</span></a></li>
 			  </ul>
 			</div>

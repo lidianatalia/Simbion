@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Daftar Pengumuman | Portal Beasiswa</title>
+<title>Detail Beasiswa | Portal Beasiswa</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment_donatur :: header"></div>
+
+<div th:replace="fragments/fragment :: header"></div>
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Daftar Pengumuman</a></div>
+    <div id="breadcrumb"> <a href="/" class="tip-bottom"><i class="icon-home"></i> Lihat Beasiswa Saya</a><a href="#" class="current">Detail Beasiswa </a></div>
 	<h1>Donatur</h1>
   </div>
   <div class="container-fluid">
@@ -24,22 +25,29 @@
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>Daftar Pengumuman</h5>
+            <h5>Detail Beasiswa</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-	       			<th>Tanggal</th>
-	       			<th>Judul</th>
-	       			<th>Pembuat</th>
+	       			<th>No Urut Pendaftar</th>
+	       			<th>Nama</th>
+	       			<th>NPM</th>
+	       			<th>Waktu Daftar</th>
+	       			<th>Status Terima</th>
+	       			<th>Pilih</th>
                 </tr>
               </thead>
               <tbody>
-                 <tr th:each="info,iterationStatus: ${pengumuman}">
-   					<td th:text="${info.tanggal}"></td>
-					<td><a class="nav-link" th:href="'/donatur/view-pengumuman/' + ${info.judul}" data-rel="popup" th:text="${info.judul}"></a></td>
-   					<td th:text="${info.username}"></td>
+                 <tr th:each="info,iterationStatus: ${pendaftaran}">
+   					<td th:text="${info.no_urut}"></td>
+   					<td th:text="${info.nama}"></td>
+   					<td th:text="${info.npm}"></td>
+   					<td th:text="${info.waktu_daftar}"></td>
+   					<td th:text="${info.status_terima}"></td>
+   					<td><a class="nav-link" href="'/donatur/status-terima/' + ${beasiswa.kode_skema_beasiswa} +'/'+${beasiswa.no_urut} + '/'+${beasiswa.npm}" data-rel="popup"><button type="button" class="btn btn-success">Terima</button></a>
+   					<a class="nav-link" href="'/donatur/status-tolak/' + ${beasiswa.kode_skema_beasiswa} +'/'+${beasiswa.no_urut} + '/'+${beasiswa.npm}" data-rel="popup"><button type="button" class="btn btn-danger">Tolak</button></a></td>
    				</tr>
               </tbody>
             </table>

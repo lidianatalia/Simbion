@@ -4,12 +4,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +29,7 @@ import com.simbion.model.MahasiswaModel;
 import com.simbion.model.PendaftaranModel;
 import com.simbion.model.PenggunaModel;
 import com.simbion.model.PengumumanModel;
+import com.simbion.model.RiwayatAkademikModel;
 import com.simbion.model.SkemaBeasiswaAktifModel;
 import com.simbion.model.TempatWawancaraModel;
 import com.simbion.model.YayasanModel;
@@ -39,16 +44,11 @@ public class SimbionController {
 	SimbionService simbionDAO;
 	
     //feature all user
-	@RequestMapping("/")
-    public String index (Model model)
-    {
-		List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
-		model.addAttribute("beasiswaAktif", beasiswaAktif);
-		return "index";
-    }	
-    
     @RequestMapping("/register")
-    public String register(@ModelAttribute("mahasiswa") MahasiswaModel mahasiswa, Model model)
+    public String register(
+    		@ModelAttribute("mahasiswa") MahasiswaModel mahasiswa, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
     {
         return "form-register";
     }
@@ -59,53 +59,66 @@ public class SimbionController {
     		@ModelAttribute("pengguna") PenggunaModel pengguna, 
     		Model model)
     {
-    	simbionDAO.insertPengguna(pengguna);
-    	simbionDAO.insertMahasiswa(mahasiswa);
-    	model.addAttribute("mahasiswa",mahasiswa);
-        return "success-add";
+    	mahasiswa.setUsername(pengguna.getUsername());
+    	if ((simbionDAO.selectMahasiswaByNPM(mahasiswa.getNpm())== null) && (simbionDAO.selectPengguna(pengguna.getUsername())== null)){
+    			simbionDAO.insertPengguna(pengguna);
+    	    	simbionDAO.insertMahasiswa(mahasiswa);
+    	    	model.addAttribute("mahasiswa",mahasiswa);
+    	        return "success-register";
+    	}else return "cancel-register";
     }
     
     @RequestMapping("/register-individual")
-    public String register_i()
+    public String register_i(@ModelAttribute("individual_donor") IndividualDonorModel individualDonor, 
+    		@ModelAttribute("donatur") DonaturModel donatur, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
     {
         return "form-register-individual";
     }
     
-    @RequestMapping(value="/register/individual/submit", method=RequestMethod.POST)
+    @RequestMapping(value="/register/submit/individual", method=RequestMethod.POST)
     public String register_submit_i(
     		@ModelAttribute("individual_donor") IndividualDonorModel individualDonor, 
     		@ModelAttribute("donatur") DonaturModel donatur, 
     		@ModelAttribute("pengguna") PenggunaModel pengguna, 
     		Model model)
     {
-    	simbionDAO.insertPengguna(pengguna);
-    	donatur.setNomor_identitas(individualDonor.getNomor_identitas_donatur());
-    	simbionDAO.insertDonatur(donatur);
-    	simbionDAO.insertIndividualDonor(individualDonor);
-    	model.addAttribute("individualDonor",individualDonor);
-        return "success-add";
+    	if ((simbionDAO.selectDonatur(donatur.getNomor_identitas())== null) && (simbionDAO.selectPengguna(pengguna.getUsername())== null)){
+	    	simbionDAO.insertPengguna(pengguna);
+	    	donatur.setNomor_identitas(individualDonor.getNomor_identitas_donatur());
+	    	simbionDAO.insertDonatur(donatur);
+	    	simbionDAO.insertIndividualDonor(individualDonor);
+	    	model.addAttribute("individualDonor",individualDonor);
+	        return "success-register";
+    	}else return "cancel-register";
     }
     
     @RequestMapping("/register-yayasan")
-    public String register_y()
+    public String register_y(@ModelAttribute("yayasan") YayasanModel yayasan, 
+    		@ModelAttribute("donatur") DonaturModel donatur, 
+    		@ModelAttribute("pengguna") PenggunaModel pengguna, 
+    		Model model)
     {
         return "form-register-yayasan";
     }
     
-    @RequestMapping(value="/register/yayasan/submit", method=RequestMethod.POST)
+    @RequestMapping(value="/register/submit/yayasan", method=RequestMethod.POST)
     public String register_submit_y(
     		@ModelAttribute("yayasan") YayasanModel yayasan, 
     		@ModelAttribute("donatur") DonaturModel donatur, 
     		@ModelAttribute("pengguna") PenggunaModel pengguna, 
     		Model model)
     {
-    	simbionDAO.insertPengguna(pengguna);
-    	donatur.setNo_telp(yayasan.getNo_telp_cp());
-    	simbionDAO.insertDonatur(donatur);
-    	yayasan.setNomor_identitas_donatur(donatur.getNomor_identitas());
-    	simbionDAO.insertYayasan(yayasan);
-    	model.addAttribute("yayasan",yayasan);
-        return "success-add";
+    	if ((simbionDAO.selectDonatur(donatur.getNomor_identitas())== null) && (simbionDAO.selectPengguna(pengguna.getUsername())== null)){
+	    	simbionDAO.insertPengguna(pengguna);
+	    	donatur.setNo_telp(yayasan.getNo_telp_cp());
+	    	simbionDAO.insertDonatur(donatur);
+	    	yayasan.setNomor_identitas_donatur(donatur.getNomor_identitas());
+	    	simbionDAO.insertYayasan(yayasan);
+	    	model.addAttribute("yayasan",yayasan);
+	        return "success-register";
+    	}else return "cancel-register";
     }
     
     @RequestMapping("/viewall-pengumuman")
@@ -124,256 +137,230 @@ public class SimbionController {
     	return "view-pengumuman";
     }
     
-    @RequestMapping("/view-detail-skema/{no_urut}")
-    public String detail(Model model,  @PathVariable(value= "no_urut")int no_urut)
+    @RequestMapping("/view-detail-skema/{kode_skema_beasiswa}/{no_urut}")
+    public String detail(Model model,  @PathVariable(value= "kode_skema_beasiswa")int kode_skema_beasiswa, @PathVariable(value= "no_urut")int no_urut)
     {
-    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
-    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
+    	SkemaBeasiswaAktifModel detailBeasiswa = simbionDAO.selectSkemaBeasiswaAktif(kode_skema_beasiswa,no_urut);
+    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode_skema_beasiswa());
+    	DonaturModel donatur = simbionDAO.selectDonatur(detailBeasiswa.getNomor_identitas_donatur().replace(" ", ""));
     	model.addAttribute("detailBeasiswa", detailBeasiswa);
     	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
+    	model.addAttribute("donatur",donatur);
     	return "view-detail-skema";
     }
     
-    //feature mhs
-    @RequestMapping("/mhs")
-    public String index_mhs (Model model)
+    @RequestMapping("/form-daftar-beasiswa")
+    public String regBeasiswa (@ModelAttribute("pendaftaran") PendaftaranModel pendaftaran,Model model)
     {
-    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
-		model.addAttribute("beasiswaAktif", beasiswaAktif);
-		return "/mhs/index";
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		List<SkemaBeasiswaAktifModel> sba = simbionDAO.selectAllListBeasiswaByStatus();
+		MahasiswaModel mahasiswa =simbionDAO.selectMahasiswa(username);
+		pendaftaran.setNpm(mahasiswa.getNpm());
+		int isKode=0;
+		model.addAttribute("sba",sba);
+		model.addAttribute("isKode", isKode);
+		model.addAttribute("mahasiswa",mahasiswa);
+        return "form-daftar-beasiswa";
     }
     
-    @RequestMapping("/mhs/viewall-pengumuman")
-    public String viewall_pengumuman_mhs(Model model)
+    @RequestMapping("/form-daftar-beasiswa/{kode_skema_beasiswa}/{no_urut}")
+    public String addBeasiswa (@ModelAttribute("pendaftaran") PendaftaranModel pendaftaran, Model model, 
+    		@PathVariable(value="kode_skema_beasiswa")int kode_skema_beasiswa,
+    		@PathVariable(value="no_urut")int no_urut)
     {
-    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
-    	model.addAttribute("pengumuman",pengumuman);
-        return "/mhs/viewall-pengumuman";
+    	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		int isKode=1;
+		SkemaBeasiswaAktifModel sba = simbionDAO.selectSkemaBeasiswaAktif(kode_skema_beasiswa, no_urut);
+		MahasiswaModel mahasiswa =simbionDAO.selectMahasiswa(username);
+		pendaftaran.setNpm(mahasiswa.getNpm());
+		model.addAttribute("sba",sba);
+		model.addAttribute("isKode", isKode);
+		model.addAttribute("kode_skema_beasiswa", kode_skema_beasiswa);
+		model.addAttribute("mahasiswa",mahasiswa);
+        return "form-daftar-beasiswa";
     }
     
-    @RequestMapping("/mhs/view-pengumuman/{judul}")
-    public String view_pengumuman_mhs(Model model, @PathVariable(value="judul")String judul)
+    @RequestMapping(value="/form-daftar-beasiswa/submit", method=RequestMethod.POST)
+    public String daftar_beasiswa(@ModelAttribute("pendaftaran") PendaftaranModel pendaftaran,Model model)
     {
-    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
-    	model.addAttribute("detailPengumuman",detailPengumuman);
-    	return "/mhs/view-pengumuman";
-    }
-    
-    @RequestMapping("/mhs/form-daftar-beasiswa")
-    public String addBeasiswa ()
-    {
-        return "/mhs/form-daftar-beasiswa";
-    }
-    
-    @RequestMapping("/mhs/view-detail-skema/{no_urut}")
-    public String detail_mhs(Model model,  @PathVariable(value= "no_urut")int no_urut)
-    {
-    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
-    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
-    	model.addAttribute("detailBeasiswa", detailBeasiswa);
-    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
-    	return "/mhs/view-detail-skema";
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		MahasiswaModel mahasiswa =simbionDAO.selectMahasiswa(username);
+		pendaftaran.setNpm(mahasiswa.getNpm());
+		String[] kode = pendaftaran.getJenis_beasiswa().split("-");
+		int kode_skema_beasiswa = Integer.parseInt(kode[0]);
+		int no_urut = Integer.parseInt(kode[1]);
+		pendaftaran.setKode_skema_beasiswa(kode_skema_beasiswa);
+		pendaftaran.setNo_urut(no_urut);
+    	pendaftaran.setWaktu_daftar(new Date());
+    	pendaftaran.setStatus_daftar("aktif");
+    	PendaftaranModel checkData = simbionDAO.selectPendaftaranByNPM(no_urut, kode_skema_beasiswa, pendaftaran.getNpm());
+    	if (checkData != null) {
+    		return "cancel-daftar";
+    	}
+    	else {
+	    	simbionDAO.insertPendaftaran(pendaftaran);
+	    	model.addAttribute("pendaftaran", pendaftaran);
+	    	return "success-add-daftar";
+    	}
     }
     
     //feature donatur
-    @RequestMapping("/donatur")
-    public String index_donatur (Model model)
+    @RequestMapping("/form-pengumuman-tambah/{kode_skema_beasiswa}/{no_urut}")
+    public String form_pengumuman(@ModelAttribute("pengumuman")PengumumanModel pengumuman, 
+    		@PathVariable(value="kode_skema_beasiswa")int kode_skema_beasiswa,
+    		@PathVariable(value="no_urut")int no_urut,
+    		Model model)
     {
-    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
-		model.addAttribute("beasiswaAktif", beasiswaAktif);
-		return "/donatur/index";
+    	
+    	pengumuman.setKode_skema_beasiswa(kode_skema_beasiswa);
+    	pengumuman.setNo_urut_skema_beasiswa_aktif(no_urut);
+        return "form-pengumuman-add";
     }
     
-    @RequestMapping("/donatur/form-pengumuman-tambah")
-    public String form_pengumuman_donatur()
-    {
-        return "/donatur/form-pengumuman-add";
-    }
-    
-    @RequestMapping(value="/donatur/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
+    @RequestMapping(value="/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
     public String add_pengumuman(
     		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
     		Model model)
     {
-    	simbionDAO.insertPengumuman(pengumuman);
-    	return "success-add-pengumuman";
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		pengumuman.setUsername(username);
+		pengumuman.setTanggal(new Date());
+		if (simbionDAO.selectPengumuman(pengumuman.getKode_skema_beasiswa(), pengumuman.getNo_urut_skema_beasiswa_aktif(), username)== null) {
+			simbionDAO.insertPengumuman(pengumuman);
+			return "success-add-pengumuman";
+		}
+		else return "cancel-pengumuman";
     }
     
-    @RequestMapping("/donatur/viewall-pengumuman")
-    public String viewall_pengumuman_donatur(Model model)
-    {
-    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
-    	model.addAttribute("pengumuman",pengumuman);
-        return "/donatur/viewall-pengumuman";
-    }
-    
-    @RequestMapping("/donatur/view-pengumuman/{judul}")
-    public String view_pengumuman_donatur(Model model, @PathVariable(value="judul")String judul)
-    {
-    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
-    	model.addAttribute("detailPengumuman",detailPengumuman);
-    	return "/donatur/view-pengumuman";
-    }
-    
-    @RequestMapping("/donatur/form-skema-tambah")
-    public String daftar_paket (
-    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
-    		@ModelAttribute("syaratBeasiswa") SyaratBeasiswaModel syaratBeasiswa,
-    		Model model)
-    {
-    	return "/donatur/form-skema-beasiswa-add";
-    }
-    
-    @RequestMapping(value="/donatur/form-skema-tambah/simpan", method=RequestMethod.POST)
-    public String tambah_skema(
-    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
-    		@ModelAttribute("syarat") SyaratBeasiswaModel syarat,
-    		Model model)
-    {
-    	simbionDAO.insertSkemaBeasiswa(skemaBeasiswa);
-    	for (String datum: skemaBeasiswa.getSyarat().split("-")) {
-    		syarat.setKode_beasiswa(skemaBeasiswa.getKode());
-    		syarat.setSyarat(datum);
-    		simbionDAO.insertSyaratBeasiswa(syarat);
-    	}
-    	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
-    	model.addAttribute("syarat", syarat);
-    		return "success-add-skema";
-    }
-
-    
-    @RequestMapping("/donatur/form-beasiswa-tambah")
+    @RequestMapping("/form-skema-tambah")
     public String add_beasiswa(
     		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa, 
     		@ModelAttribute("syaratBeasiswa") SyaratBeasiswaModel syaratBeasiswa,
     		Model model)
     {
-    	return "/donatur/form-beasiswa-aktif-add";
+    	return "form-skema-beasiswa-add";
     }
     
-    @RequestMapping(value="/donatur/form-beasiswa-tambah/simpan", method=RequestMethod.POST)
-    public String add_beasiswa_aktif(
-    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaAktifModel beasiswaAktif,
+    @RequestMapping(value="/form-skema-tambah/simpan", method=RequestMethod.POST)
+    public String add_beasiswa_submit(
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
     		@ModelAttribute("syarat") SyaratBeasiswaModel syarat,
     		Model model)
     {
-    	beasiswaAktif.setTgl_tutup_pendaftaran(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-    	
-    	simbionDAO.insertSkemaBeasiswaAktif(beasiswaAktif);
-    	for (String datum: beasiswaAktif.getSyarat().split("-")) {
-    		syarat.setKode_beasiswa(beasiswaAktif.getKode_skema_beasiswa());
-    		syarat.setSyarat(datum);
-    		simbionDAO.insertSyaratBeasiswa(syarat);
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		String nomor_identitas_donatur = simbionDAO.selectDonatur(username).getNomor_identitas();
+    	if (simbionDAO.selectSkemaBeasiswa(skemaBeasiswa.getKode())== null) {
+    		skemaBeasiswa.setNomor_identitas_donatur(nomor_identitas_donatur);
+    		simbionDAO.insertSkemaBeasiswa(skemaBeasiswa);
+	    	for (String datum: skemaBeasiswa.getSyarat().split("-")) {
+	    		syarat.setKode_beasiswa(skemaBeasiswa.getKode());
+	    		syarat.setSyarat(datum);
+	    		simbionDAO.insertSyaratBeasiswa(syarat);
+	    	}
+	    	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
+	    	model.addAttribute("syarat", syarat);
+	        return "success-add-skema";
     	}
-    	model.addAttribute("skemaBeasiswa", beasiswaAktif);
-    	model.addAttribute("syarat", syarat);
-        return "success-add-skema";
+    	else return"cancel-daftar";
     }
     
-    @RequestMapping("/donatur/form-pembayaran-tambah")
+    @RequestMapping("/form-beasiswa-tambah")
+    public String add_beasiswa_aktif(
+    		@ModelAttribute("skemaBeasiswaAktif") SkemaBeasiswaAktifModel skemaBeasiswaAktif,
+    		Model model)
+    {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		String nomor_identitas_donatur = simbionDAO.selectDonatur(username).getNomor_identitas();
+		List<SkemaBeasiswaModel> beasiswa= simbionDAO.selectSkemaBeasiswa(nomor_identitas_donatur);
+    	model.addAttribute("beasiswa",beasiswa);
+    	return "form-beasiswa-aktif-add";
+    }
+    
+    @RequestMapping(value="/form-beasiswa-tambah/simpan", method=RequestMethod.POST)
+    public String add_beasiswa_aktif_submit(
+    		@ModelAttribute("skemaBeasiswaAktif") SkemaBeasiswaAktifModel skemaBeasiswaAktif, 
+    		@ModelAttribute("skemaBeasiswa") SkemaBeasiswaModel skemaBeasiswa,
+    		Model model)
+    {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+    	if (simbionDAO.selectSkemaBeasiswaAktif(skemaBeasiswaAktif.getKode_skema_beasiswa(),skemaBeasiswaAktif.getNo_urut())== null) {
+    		skemaBeasiswaAktif.setNomor_identitas_donatur(simbionDAO.selectDonatur(username).getNomor_identitas());
+    		skemaBeasiswaAktif.setStatus("dibuka");    		
+    		
+    		//Initialize your Date however you like it.
+    		Calendar calendar = new GregorianCalendar();
+    		calendar.setTime(skemaBeasiswaAktif.getTgl_tutup_pendaftaran());
+    		Integer year = calendar.get(Calendar.YEAR);
+    		skemaBeasiswaAktif.setPeriode_penerimaan(year.toString());
+    		simbionDAO.insertSkemaBeasiswaAktif(skemaBeasiswaAktif);
+	    	model.addAttribute("skemaBeasiswa", skemaBeasiswa);
+	        return "success-add-skema";
+    	}
+    	else return"cancel-daftar";
+    }
+    
+    @RequestMapping("/form-pembayaran-tambah")
     public String info_bayar()
     {
-    	return "/donatur/form-pembayaran-tambah";
+    	return "form-pembayaran-tambah";
     }
     
-    @RequestMapping("/donatur/view-beasiswa")
+    @RequestMapping("/view-beasiswa")
     public String viewBeasiswa (Model model)
     {
-    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectListBeasiswaByDonatur("127150014474");
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		String nomor_identitas_donatur = simbionDAO.selectDonatur(username).getNomor_identitas();
+    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectListBeasiswaByDonatur(nomor_identitas_donatur);
 		model.addAttribute("beasiswaAktif", beasiswaAktif);
-		return "/donatur/view-beasiswa";
+		return "view-beasiswa";
     }
     
-    @RequestMapping("/donatur/view-detail-beasiswa/{kode_skema_beasiswa}/{no_urut}")
+    @RequestMapping("/view-detail-beasiswa/{kode_skema_beasiswa}/{no_urut}")
     public String lihatDetailBeasiswa (Model model,
     		@PathVariable(value="kode_skema_beasiswa")int kode_skema_beasiswa,
     		@PathVariable(value="no_urut")int no_urut)
     {
     	List<PendaftaranModel>pendaftaran = simbionDAO.selectPendaftaranByDonatur(kode_skema_beasiswa,no_urut);
     	model.addAttribute("pendaftaran",pendaftaran);
-        return "/donatur/view-detail-beasiswa";
+        return "/view-detail-beasiswa";
     }
-    
-    @RequestMapping("/donatur/view-detail-skema/{no_urut}")
-    public String detail_donatur(Model model,  @PathVariable(value= "no_urut")int no_urut)
-    {
-    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
-    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
-    	model.addAttribute("detailBeasiswa", detailBeasiswa);
-    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
-    	return "/donatur/view-detail-skema";
-    }
-    
     
     //feature admin
-    @RequestMapping("/admin")
-    public String index_admin (Model model)
+    @RequestMapping("/tempat-wawancara/add")
+    public String tempatWawancara (@ModelAttribute("tempatWawancara") TempatWawancaraModel tempatWawancara, Model model)
     {
-    	List<SkemaBeasiswaAktifModel> beasiswaAktif = simbionDAO.selectAllListBeasiswa();
-		model.addAttribute("beasiswaAktif", beasiswaAktif);
-		return "/admin/index";
-    }
-    @RequestMapping("/admin/form-tempat-wawancara-tambah")
-    public String tempatWawancara ()
-    {
-    	return "/admin/form-tempat-wawancara-add";
+    	return "form-tempat-wawancara-add";
     }
     
-    @RequestMapping("/admin/form-pengumuman-tambah")
-    public String form_pengumuman()
-    {
-        return "/admin/form-pengumuman-add";
-    }
-    
-    @RequestMapping(value="/admin/tempat-wawancara/submit", method=RequestMethod.POST)
+    @RequestMapping(value="/tempat-wawancara/submit", method=RequestMethod.POST)
     public String register_tempat(
     		@ModelAttribute("tempatWawancara") TempatWawancaraModel tempatWawancara, Model model)
     {
-    	simbionDAO.insertTempatWawancara(tempatWawancara);
-    	model.addAttribute("tempatWawancara",tempatWawancara);
-        return "/admin/success-add";
+    	if(simbionDAO.selectTempatWawancara(tempatWawancara.getKode())!= null){
+    		return "cancel-tempat";
+    	}
+    	else {
+	    	simbionDAO.insertTempatWawancara(tempatWawancara);
+	    	model.addAttribute("tempatWawancara",tempatWawancara);
+	        return "success-add-tempat";
+    	}
     }
     
-    @RequestMapping("/admin/view-detail-skema/{no_urut}")
-    public String detail_admin(Model model,  @PathVariable(value= "no_urut")int no_urut)
-    {
-    	SkemaBeasiswaModel detailBeasiswa = simbionDAO.selectSkemaBeasiswa(no_urut);
-    	List<SyaratBeasiswaModel>syaratBeasiswa=simbionDAO.selectSyaratBeasiswaByKode(detailBeasiswa.getKode());
-    	model.addAttribute("detailBeasiswa", detailBeasiswa);
-    	model.addAttribute("syaratBeasiswa",syaratBeasiswa);
-    	return "/admin/view-detail-skema";
-    }
-    @RequestMapping(value="/admin/form-pengumuman-tambah/simpan", method=RequestMethod.POST)
-    public String admin_add_pengumuman(
-    		@ModelAttribute("pengumuman") PengumumanModel pengumuman,
-    		Model model)
-    {
-    	simbionDAO.insertPengumuman(pengumuman);
-    	return "success-add-pengumuman";
-    }
-    
-    @RequestMapping("/admin/viewall-tempat-wawancara")
+    @RequestMapping("/viewall-tempat-wawancara")
     public String viewall_tempat_wawancara(Model model)
     {
     	List<TempatWawancaraModel>tempat_wawancara=simbionDAO.selectAllTempatWawancara();
     	model.addAttribute("tempat_wawancara",tempat_wawancara);
         
-        return "/admin/viewall-tempat-wawancara";
-    }
-    
-    @RequestMapping("/admin/viewall-pengumuman")
-    public String viewall_pengumuman_admin(Model model)
-    {
-    	List<PengumumanModel>pengumuman = simbionDAO.selectAllPengumuman();
-    	model.addAttribute("pengumuman",pengumuman);
-        return "/admin/viewall-pengumuman";
-    }
-    
-    @RequestMapping("/admin/view-pengumuman/{judul}")
-    public String view_pengumuman_admin(Model model, @PathVariable(value="judul")String judul)
-    {
-    	PengumumanModel detailPengumuman = simbionDAO.viewPengumuman(judul);
-    	model.addAttribute("detailPengumuman",detailPengumuman);
-    	return "/admin/view-pengumuman";
+        return "viewall-tempat-wawancara";
     }
 }

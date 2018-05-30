@@ -52,7 +52,7 @@
 				<h5>Form Pendaftaran</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<form class="form-horizontal" action="/register/submit" name="basic_validate" id="basic_validate" novalidate="novalidate" method="post">
+				<form class="form-horizontal" th:action="@{/register/submit}" name="form" method="post" onsubmit="return validateForm()">
 					<div class="control-group">
 						<label class="control-label">Pilih Role</label>
 						<div class="controls">
@@ -67,18 +67,17 @@
 						<div class="control-group">
 							<label class="control-label">Jenis Donatur</label>
 							<div class="controls">
-							  <label>
-								<div class="radio" id="uniform-undefined"><span class=""><input type="radio" value="1" name="jenis_donatur" id='check_I' onclick='showJenisDonatur()' style="opacity: 0;"></span></div>
-								Individual</label>
-							  <label>
-								<div class="radio" id="uniform-undefined"><span class=""><input type="radio" value="1" name="jenis_donatur" id='check_Y' onclick='showJenisDonatur()' style="opacity: 0;"></span></div>
-								Yayasan</label>
-							<div class="form-actions" style="display: none" id="i">
-								<a class="nav-link" href="/register-individual" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
-							</div>
-							<div class="form-actions" style="display: none" id="y">
-								<a class="nav-link" href="/register-yayasan" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
-							</div>
+								<select class="select2-containername"  name="jenis_donatur" id="jenisDonatur" onchange='showJenisDonatur()'>
+									<option value="" selected="selected" disabled="disabled">--Pilih Jenis Donatur--</option>
+									<option value="check_I">Individual</option>
+									<option value="check_Y">Yayasan</option>
+								</select>
+								<div class="form-actions" style="display: none" id="i">
+									<a class="nav-link" href="/register-individual" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
+								</div>
+								<div class="form-actions" style="display: none" id="y">
+									<a class="nav-link" href="/register-yayasan" data-rel="popup"><button type="button" class="btn btn-success">Lanjutkan Proses Pendaftaran</button></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -86,67 +85,67 @@
 						<div class="control-group">
 							<label class="control-label">User Name</label>
 							<div class="controls">
-								<input type="text" id="required" name="username">
+								<input type="text" maxlength="20" placeholder="Maksimal 20 karakter" id="username" th:value="${pengguna.username}" name="username">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Password</label>
 							<div class="controls">
-								<input type="password" id="required" name="password">
+								<input type="password" maxlength="20" placeholder="Maksimal 20 karakter" id="password" th:value="${pengguna.password}" name="password">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">NPM</label>
 							<div class="controls">
-								<input type="text" id="number" name="npm">
+								<input type="text" id="npm" maxlength="20" placeholder="Maksimal 20 digit" name="npm" th:value="${mahasiswa.npm}">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Email</label>
 							<div class="controls">
-								<input type="text" id="required" name="email">
+								<input type="text" id="email" maxlength="50" placeholder="Maksimal 50 karakter" name="email" th:value="${mahasiswa.email}">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Nama Lengkap</label>
 							<div class="controls">
-								<input type="text" id="required" name="nama">
+								<input type="text" id="nama" name="nama" maxlength="50" placeholder="Maksimal 50 karakter" th:value="${mahasiswa.nama}">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Nomor Telepon</label>
 							<div class="controls">
-								<input type="text" id="required" name="no_telp">
+								<input type="text" id="no_telp" name="no_telp" th:value="${mahasiswa.no_telp}" maxlength="20" placeholder="Maksimal 20 karakter">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Alamat Tempat Tinggal</label>
 							<div class="controls">
-								<textarea class="span5" name="alamat_tinggal"></textarea>
+								<textarea class="span5" id="alamat_tinggal" name="alamat_tinggal" th:value="${mahasiswa.alamat_tinggal}"></textarea>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Alamat Domisili</label>
 							<div class="controls">
-							  <textarea class="span5" name="alamat_domisili"></textarea>
+							  <textarea class="span5" id="alamat_domisili" name="alamat_domisili" th:value="${mahasiswa.alamat_domisili}"></textarea>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Instansi Bank</label>
 							<div class="controls">
-								<input type="text" id="required" name="nama_bank">
+								<input type="text" id="nama_bank" name="nama_bank" th:value="${mahasiswa.nama_bank}" maxlength="50" placeholder="Maksimal 50 karakter">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Nomor Rekening</label>
 							<div class="controls">
-								<input type="text" id="required" name="no_rekening">
+								<input type="text" id="no_rekening" name="no_rekening" th:value="${mahasiswa.no_rekening}" maxlength="20" placeholder="Maksimal 20 karakter">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Nama Pemilik</label>
 							<div class="controls">
-								<input type="text" id="required" name="nama_pemilik">
+								<input type="text" id="nama_pemilik" name="nama_pemilik" th:value="${mahasiswa.nama_pemilik}" maxlength="50" placeholder="Maksimal 50 karakter">
 							</div>
 						</div>
 						<div class="form-actions">
@@ -176,14 +175,60 @@
 	}
 	}
 	function showJenisDonatur(){
-		if (document.getElementById('check_I').checked) {
+		if (document.getElementById('jenisDonatur').value=="check_I") {
 			document.getElementById('i').style.display = 'block';
 			document.getElementById('y').style.display = 'none';
-		} else if(document.getElementById('check_Y').checked){
+		} else {
 			document.getElementById('i').style.display = 'none';
 			document.getElementById('y').style.display = 'block';
 			
 		}
+	}
+	
+	function validateForm() {
+		var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+		if (document.getElementById('username').value==""){
+	        alert("Username harus diisi");
+	        document.form.username.focus() ;
+	        return false;
+	    }else if (document.getElementById('npm').value==""){
+	        alert("NPM harus diisi");
+	        document.form.npm.focus() ;
+	        return false;
+	    }else if (document.getElementById('email').value==""){
+	        alert("E-mail harus diisi");
+	        document.form.email.focus() ;
+	        return false;
+	    }else if (document.getElementById('nama').value==""){
+	        alert("Nama lengkap harus diisi");
+	        document.form.nama.focus() ;
+	        return false;
+	    }else if (document.getElementById('alamat_tinggal').value==""){
+	        alert("Alamat tempat tinggal harus diisi");
+	        document.form.alamat_tinggal.focus() ;
+	        return false;
+	    }else if (document.getElementById('alamat_domisili').value==""){
+	        alert("Alamat domisili harus diisi");
+	        document.form.alamat_domisili.focus() ;
+	        return false;
+	    }else if (document.getElementById('nama_bank').value==""){
+	        alert("Instansi bank harus diisi");
+	        document.form.nama_bank.focus() ;
+	        return false;
+	    }else if (document.getElementById('no_rekening').value==""){
+	        alert("Nomor rekening harus diisi");
+	        document.form.no_rekening.focus() ;
+	        return false;
+	    }else if (document.getElementById('nama_pemilik').value==""){
+	        alert("Nama pemilik harus diisi");
+	        document.form.nama_pemilik.focus() ;
+	        return false;
+	    }else if (regex.test(document.getElementById('password').value)) {
+	        return true;
+	    }else {
+	    	alert("Password harus terdiri dari angka dan bilangan, panjang minimal 8 karakter");
+	        return false;
+	    }
 	}
 </script>
 <div class="row-fluid">

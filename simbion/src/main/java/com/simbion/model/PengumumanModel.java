@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class PengumumanModel {
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private String tanggal;
+	private Date tanggal;
 	private int no_urut_skema_beasiswa_aktif;
 	private int kode_skema_beasiswa;
 	private String username;

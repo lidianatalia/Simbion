@@ -12,60 +12,63 @@
 	<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment :: header"></div>
-	<div id="content">
-		<div id="content-header">
-			<div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
-				<h1></h1>
-			</div>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title">
-             <span class="icon"><i class="icon-th"></i></span> 
-            <h5>List Beasiswa</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
-              <thead>
-                <tr>
-	       			<th>No</th>
-	       			<th>Nama</th>
-	       			<th>Waktu Tutup Pendaftaran</th>
-	       			<th>Status Beasiswa</th>
-	       			<th>Jumlah Pendaftar</th>
-	       			<th>Rincian</th>
-                </tr>
-              </thead>
-              <tbody>
-                 <tr th:each="beasiswa,iterationStatus: ${beasiswaAktif}">
-   					<td th:text="${beasiswa.no_urut}"></td>
-   					<td th:text="${beasiswa.nama}"></td>
-   					<td th:text="${beasiswa.tgl_tutup_pendaftaran}"></td>
-   					<td th:text="${beasiswa.status}"></td>
-   					<td th:text="${beasiswa.jumlah_pendaftar}"></td>
-   					<td><a th:href="'/view-detail-skema/'+ ${beasiswa.no_urut}"><button type="button" class="btn btn-info" >
-   					Detail</button></a></td>
-   				</tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row-fluid">
-  <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
-</div>
-<script src="/js/jquery.min.js"></script> 
-<script src="/js/jquery.ui.custom.js"></script> 
-<script src="/js/bootstrap.min.js"></script> 
-<script src="/js/jquery.uniform.js"></script> 
-<script src="/js/select2.min.js"></script> 
-<script src="/js/jquery.dataTables.min.js"></script> 
-<script src="/js/maruti.js"></script> 
-<script src="/js/maruti.tables.js"></script>
+	<div th:replace="fragments/fragment :: header"></div>
+		<div id="content">
+			<div id="content-header">
+				<div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
+					<h1></h1>
+				</div>
+				<div class="container-fluid">
+				    <div class="row-fluid">
+				      <div class="span12">
+				        <div class="widget-box">
+				          <div class="widget-title">
+				             <span class="icon"><i class="icon-th"></i></span> 
+				            <h5>List Beasiswa</h5>
+				          </div>
+				          <div class="widget-content nopadding">
+				            <table class="table table-bordered data-table">
+				              <thead>
+				                <tr>
+					       			<th>No</th>
+					       			<th>Nama</th>
+					       			<th>Waktu Tutup Pendaftaran</th>
+					       			<th>Status Beasiswa</th>
+					       			<th>Jumlah Pendaftar</th>
+					       			<th>Rincian</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                 <tr th:each="beasiswa,iterationStatus: ${beasiswaAktif}">
+				   					<td th:text="${beasiswa.no_urut}"></td>
+				   					<td th:text="${beasiswa.nama}"></td>
+				   					<td th:text="${beasiswa.tgl_tutup_pendaftaran}"></td>
+				   					<td th:if="${beasiswa.status}=='dibuka'"><span class="label label-success" th:text="${beasiswa.status}"></span></td>
+				   					<td th:unless="${beasiswa.status} == 'dibuka'"><span class="label label-danger" th:text="${beasiswa.status}"></span></td>
+				   					<td th:text="${beasiswa.jumlah_pendaftar}"></td>
+				   					<td>
+				   						<a th:href="'/view-detail-skema/'+ ${beasiswa.kode_skema_beasiswa} + '/' + ${beasiswa.no_urut}"><button type="button" class="btn btn-info" >Detail</button></a>
+				   						<a th:if="${#httpServletRequest.isUserInRole('ADMIN')||#httpServletRequest.isUserInRole('DONATUR')} and ${beasiswa.status}=='ditutup'" th:href="'/form-pengumuman-tambah/'+ ${beasiswa.kode_skema_beasiswa} + '/' + ${beasiswa.no_urut}"><button type="button" class="btn btn-danger" >Buat Pengumuman</button></a>
+				   					</td>
+				   				</tr>
+				              </tbody>
+				            </table>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+			  </div>
+		</div>
+	<div class="row-fluid">
+		<div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+	</div>
+	<script src="/js/jquery.min.js"></script> 
+	<script src="/js/jquery.ui.custom.js"></script> 
+	<script src="/js/bootstrap.min.js"></script> 
+	<script src="/js/jquery.uniform.js"></script> 
+	<script src="/js/select2.min.js"></script> 
+	<script src="/js/jquery.dataTables.min.js"></script> 
+	<script src="/js/maruti.js"></script> 
+	<script src="/js/maruti.tables.js"></script>	
 </body>
 </html>

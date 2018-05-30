@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment_donatur :: header"></div>
+<div th:replace="fragments/fragment :: header"></div>
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Paket Beasiswa</a><a href="#" class="current">Menambah Beasiswa Dari Paket</a></div>
@@ -30,14 +30,13 @@
 				<h5>Menambah Beasiswa Dari Paket</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<form class="form-horizontal" method="post" action="/donatur/form-beasiswa-tambah/simpan" name="basic_validate" id="basic_validate" novalidate="novalidate">
+				<form class="form-horizontal" method="post" th:action="@{/form-beasiswa-tambah/simpan}" name="form" id="form" onsubmit="return validateForm()">
 					<div class="control-group">
 						<label class="control-label">Kode Beasiswa</label>
 						<div class="controls">
 							<select class="select2-containername"  name="kode_skema_beasiswa">
 								<option value="" selected="selected">--Pilih Jenis Beasiswa--</option>
-								<option value="prestasi">Beasiswa 0001</option>
-								<option value="bantuan">Beasiswa 0002</option>
+								<option th:each="data : ${beasiswa}" th:value="${data.kode}" th:text="${data.kode}" ></option>
 							</select>
 						</div>
 					</div>
@@ -75,6 +74,26 @@
     </div>
   </div>
 </div>
+<script>
+	function validateForm() {
+		if (document.getElementById('kode_skema_beasiswa').value==""){
+	        alert("Kode beasiswa harus diisi");
+	        document.form.kode_skema_beasiswa.focus() ;
+	        return false;
+	    }else if (document.getElementById('no_urut').value==""){
+	        alert("Nomor urut beasiswa harus diisi");
+	        document.form.no_urut.focus() ;
+	        return false;
+	    }else if (document.getElementById('tgl_mulai_pendaftaran').value==""){
+	        alert("Tanggal Mulai Pendaftaran harus diisi");
+	        document.form.tgl_mulai_pendaftaran.focus() ;
+	        return false;
+	    }else if (document.getElementById('tgl_tutup_pendaftaran').value==""){
+	        alert("Tanggal Tutup Pendaftaran harus diisi");
+	        document.form.tgl_tutup_pendaftaran.focus() ;
+	        return false;
+	}
+</script>
 <div class="row-fluid">
   <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>

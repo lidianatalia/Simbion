@@ -16,10 +16,12 @@ public class PendaftaranModel {
 	private int no_urut;
 	private int kode_skema_beasiswa;
 	private String npm;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private String waktu_daftar;
+
+	private Date waktu_daftar;
 	private String status_daftar;
 	private String status_terima;
+	private double ips;
 	
 	private String nama;
+	private String jenis_beasiswa;
 }

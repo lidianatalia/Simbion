@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Daftar Pengumuman | Portal Beasiswa</title>
+<title>View Tempat Wawancara | Portal Beasiswa</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment_admin :: header"></div>
+<div th:replace="fragments/fragment :: header"></div>
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Daftar Pengumuman</a></div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Lihat Tempat Wawancara</a></div>
 	<h1>Administrator</h1>
   </div>
   <div class="container-fluid">
@@ -24,22 +24,22 @@
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>Daftar Pengumuman</h5>
+            <h5>List Tempat Wawancara</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-	       			<th>Tanggal</th>
-	       			<th>Judul</th>
-	       			<th>Pembuat</th>
+	       			<th>Kode</th>
+	       			<th>Nama</th>
+	       			<th>Lokasi</th>
                 </tr>
               </thead>
-               <tbody>
-                 <tr th:each="info,iterationStatus: ${pengumuman}">
-   					<td th:text="${info.tanggal}"></td>
-					<td><a class="nav-link" th:href="'/admin/view-pengumuman/' + ${info.judul}" data-rel="popup" th:text="${info.judul}"></a></td>
-   					<td th:text="${info.username}"></td>
+              <tbody>
+                 <tr th:each="tempat,iterationStatus:${tempat_wawancara}">
+   					<td th:text="${tempat.kode}"></td>
+   					<td th:text="${tempat.nama}"></td>
+   					<td th:text="${tempat.lokasi}"></td>
    				</tr>
               </tbody>
             </table>

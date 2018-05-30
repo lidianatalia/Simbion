@@ -27,8 +27,8 @@
             <h5>Detail Beasiswa Aktif</h5>
           </div>
           <div class="widget-content">
-			<h3 th:text="${detailBeasiswa.nama} + ' - ' + ${detailBeasiswa.kode}"></h3>
-			<h5 th:text="${detailBeasiswa.jenis} + ' dibuat oleh ' + ${detailBeasiswa.no_urut}"></h5>
+			<h3 th:text="${detailBeasiswa.nama} + ' - ' + ${detailBeasiswa.kode_skema_beasiswa}"></h3>
+			<h5 th:text="${detailBeasiswa.jenis} + ' dibuat oleh ' + ${donatur.nama}"></h5>
 			<h5 th:text="${detailBeasiswa.deskripsi}"></h5>
 			<h5>Syarat beasiswa :</h5>
 			<table>
@@ -36,8 +36,8 @@
 					<td th:text="${syarat.syarat}"></td>
 				</tr>
 			</table>
-			<div class="col-4">
-				<a href ="/register"><button type="submit" class="btn btn-warning">Daftar Beasiswa Ini</button></a>
+			<div class="col-4" th:if="${#httpServletRequest.isUserInRole('MAHASISWA')}" >
+				<a th:href="'/form-daftar-beasiswa/'+ ${detailBeasiswa.kode_skema_beasiswa} + '/' +${detailBeasiswa.no_urut}"><button type="submit" class="btn btn-warning">Daftar Beasiswa Ini</button></a>
 			</div>
           </div>
         </div>

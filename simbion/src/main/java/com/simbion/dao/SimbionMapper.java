@@ -25,8 +25,8 @@ import com.simbion.model.YayasanModel;
 public interface SimbionMapper {
 	@Select("select  * from tempat_wawancara")
 	List<TempatWawancaraModel>selectAllTempatWawancara();
-
-	@Select("select sba.no_urut, sb.nama, sba.tgl_tutup_pendaftaran, \r\n" + 
+	
+	@Select("select sba.kode_skema_beasiswa, sba.no_urut, sb.nama, sba.tgl_tutup_pendaftaran, \r\n" + 
 			"case when  sba.status='aktif' then 'dibuka'\r\n" + 
 			"else 'ditutup' end as status, sba.jumlah_pendaftar \r\n" + 
 			"from SKEMA_BEASISWA sb left join SKEMA_BEASISWA_AKTIF sba\r\n" + 
@@ -37,22 +37,50 @@ public interface SimbionMapper {
 			"case when  sba.status='aktif' then 'dibuka'\r\n" + 
 			"else 'ditutup' end as status, sba.jumlah_pendaftar \r\n" + 
 			"from SKEMA_BEASISWA sb left join SKEMA_BEASISWA_AKTIF sba\r\n" + 
+			"on sb.kode= sba.kode_skema_beasiswa where status='aktif'")
+	List<SkemaBeasiswaAktifModel> selectAllListBeasiswaByStatus();
+	
+	@Select("select sba.kode_skema_beasiswa, sba.no_urut, sb.nama, sba.tgl_tutup_pendaftaran, \r\n" + 
+			"case when  sba.status='aktif' then 'dibuka'\r\n" + 
+			"else 'ditutup' end as status, sba.jumlah_pendaftar \r\n" + 
+			"from SKEMA_BEASISWA sb left join SKEMA_BEASISWA_AKTIF sba\r\n" + 
 			"on sb.kode= sba.kode_skema_beasiswa where sb.nomor_identitas_donatur = #{nomor_identitas_donatur}"
 			+ "order by status asc")
 	List<SkemaBeasiswaAktifModel> selectListBeasiswaByDonatur(String nomor_identitas_donatur);
+	
+	@Select("select sba.kode_skema_beasiswa, sba.no_urut, sb.nama, sb.kode,sb.jenis, sb.deskripsi,sb.nomor_identitas_donatur \r\n" + 
+			"from skema_beasiswa sb, skema_beasiswa_aktif sba \r\n" + 
+			"where sb.kode = #{kode_skema_beasiswa} and no_urut = #{no_urut}")
+	SkemaBeasiswaAktifModel selectSkemaBeasiswaAktif( @Param("kode_skema_beasiswa")int kode_skema_beasiswa, @Param("no_urut")int no_urut);
 	
 	@Select ("select p.no_urut, m.nama, p.npm, p.waktu_daftar,p.status_terima from pendaftaran p, mahasiswa m \r\n" + 
 			"where p.npm=m.npm and p.kode_skema_beasiswa=#{kode_skema_beasiswa} and p.no_urut=#{no_urut}")
 	List<PendaftaranModel>selectPendaftaranByDonatur(@Param("kode_skema_beasiswa")int kode_skema_beasiswa, @Param("no_urut")int no_urut);
 	
-	@Select("select sba.no_urut, sb.nama, sb.kode,sb.jenis, sb.deskripsi,sb.nomor_identitas_donatur \r\n" + 
-			"from skema_beasiswa sb, skema_beasiswa_aktif sba \r\n" + 
-			"where sb.kode = sba.kode_skema_beasiswa and no_urut = #{no_urut}")
-	SkemaBeasiswaModel selectSkemaBeasiswa(int no_urut);
+	@Select("select * from skema_beasiswa where kode=#{kode}")
+	SkemaBeasiswaModel selectSkemaBeasiswaByKode( @Param("kode")int kode);
+	
+	@Select("select * from skema_beasiswa where nomor_identitas_donatur=#{nomor_identitas_donatur}")
+	List<SkemaBeasiswaModel> selectSkemaBeasiswa(@Param("nomor_identitas_donatur")String nomor_identitas_donatur);
+	
+	@Select ("select * from pendaftaran where no_urut=#{no_urut} and kode_skema_beasiswa=#{kode_skema_beasiswa} and npm=#{npm}")
+	PendaftaranModel selectPendaftaranByNPM (@Param("no_urut")int no_urut, @Param("kode_skema_beasiswa")int kode_skema_beasiswa, @Param("npm") String npm );
 	
 	@Select ("select * from syarat_beasiswa where kode_beasiswa=#{kode_beasiswa}")
 	List<SyaratBeasiswaModel> selectSyaratBeasiswaByKode(int kode_beasiswa);
-
+	
+	@Select("select * from mahasiswa where username= #{username}")
+	MahasiswaModel selectMahasiswa(String username);
+	
+	@Select("select * from mahasiswa where npm= #{npm}")
+	MahasiswaModel selectMahasiswaByNPM(String npm);
+	
+	@Select("select * from pengguna where username= #{username}")
+	PenggunaModel selectPengguna(String username);
+	
+	@Select("select * from donatur where username= #{username}")
+	DonaturModel selectDonatur(@Param("username") String username);
+	
 	@Insert("insert INTO mahasiswa ("
 			+ "username, npm, email, nama, no_telp, "
 			+ "alamat_tinggal, alamat_domisili, nama_bank, no_rekening, nama_pemilik)"
@@ -79,15 +107,15 @@ public interface SimbionMapper {
 	void insertPengguna(PenggunaModel pengguna);
 	
 	@Insert("insert INTO skema_beasiswa (kode, nama, jenis, deskripsi, nomor_identitas_donatur) "
-			+ "values (#{kode}, #{nama}, #{jenis}, #{deskripsi}, '126193489843')")
+			+ "values (#{kode}, #{nama}, #{jenis}, #{deskripsi}, #{nomor_identitas_donatur})")
 	void insertSkemaBeasiswa(SkemaBeasiswaModel skemaBeasiswa);
 	
-	@Insert("insert INTO skema_beasiswa_aktif (kode_skema_beasiswa, no_urut, tgl_mulai_pendaftaran, tgl_tutup_pendaftaran) "
-			+ "values (#{kode_skema_beasiswa}, #{no_urut}, #{tgl_mulai_pendaftaran}, #{tgl_tutup_pendaftaran})")
+	@Insert("insert INTO skema_beasiswa_aktif (kode_skema_beasiswa, no_urut, tgl_mulai_pendaftaran, tgl_tutup_pendaftaran, periode_penerimaan, status, jumlah_pendaftar, total_pembayaran) "
+			+ "values (#{kode_skema_beasiswa}, #{no_urut}, #{tgl_mulai_pendaftaran}, #{tgl_tutup_pendaftaran}, #{periode_penerimaan}, #{status}, 0, 0 )")
 	void insertSkemaBeasiswaAktif(SkemaBeasiswaAktifModel skemaBeasiswaAktif);
 	
-	@Insert("insert INTO pendaftaran (kode, npm, email, indeks_prestasi) "
-			+ "values (#{kode}, #{npm}, #{email}, #{indeks_prestasi})")
+	@Insert("insert INTO pendaftaran (no_urut, kode_skema_beasiswa,npm, waktu_daftar, status_daftar, ips) "
+			+ "values (#{no_urut}, #{kode_skema_beasiswa},#{npm}, #{waktu_daftar},#{status_daftar},#{ips})")
 	void insertPendaftaran(PendaftaranModel daftarBeasiswa);
 	
 	@Select("select no_urut, kode_skema_beasiswa, tgl_tutup_pendaftaran, status, "
@@ -105,9 +133,15 @@ public interface SimbionMapper {
 	@Select("select tanggal, judul, username from pengumuman")
 	List<PengumumanModel> selectAllPengumuman();
 	
+	@Select ("select * from pengumuman where kode_skema_beasiswa=#{kode_skema_beasiswa} and no_urut_skema_beasiswa_aktif= #{no_urut_skema_beasiswa_aktif} and username=#{username}")
+	PengumumanModel selectPengumuman ( @Param("kode_skema_beasiswa")int kode_skema_beasiswa,  @Param("no_urut_skema_beasiswa_aktif")int no_urut_skema_beasiswa_aktif ,  @Param("username")String username);
+	
 	@Select("select judul, kode_skema_beasiswa, no_urut_skema_beasiswa_aktif, username, tanggal, isi\r\n" + 
 			"from pengumuman where judul = #{judul}")
 	PengumumanModel viewPengumuman(String judul);
+	
+	@Select("select * from tempat_wawancara where kode= #{kode}")
+	TempatWawancaraModel selectTempatWawancara(int kode);
 	
 	@Insert("insert INTO pembayaran (urutan, kode_skema_beasiswa, "
 			+ "no_urut_skema_beasiswa_aktif, npm, keterangan, tgl_bayar, nominal) "
@@ -119,7 +153,7 @@ public interface SimbionMapper {
 	void insertSyaratBeasiswa(SyaratBeasiswaModel syarat);
 	
 	@Insert("insert INTO pengumuman (tanggal, no_urut_skema_beasiswa_aktif, kode_skema_beasiswa, username, judul, isi) "
-			+ "values ('2017-04-19' , 6, 1002,  'clemens.sullivan', #{judul}, #{isi})")
+			+ "values (#{tanggal} , #{no_urut_skema_beasiswa_aktif}, #{kode_skema_beasiswa},  #{username}, #{judul}, #{isi})")
 	void insertPengumuman(PengumumanModel pengumuman);
 	
 	@Update("update Pendaftaran set status_terima =#{status_terima} where kode_skema_beasiswa=#{kode_skema_beasiswa}"

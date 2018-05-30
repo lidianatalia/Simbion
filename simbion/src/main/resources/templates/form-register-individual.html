@@ -52,59 +52,59 @@
 				<h5>Form Pendaftaran Individual Donatur</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<form class="form-horizontal" method="post" action="/register/individual/submit" name="basic_validate" id="basic_validate" novalidate="novalidate">
+				<form class="form-horizontal" method="post" th:action="@{/register/submit/individual}" name="form" onsubmit="return validateForm()">
 					<div class="control-group">
 						<label class="control-label">User Name</label>
 						<div class="controls">
-							<input type="text" id="required" name="username">
+							<input type="text" id="username" name="username" placeholder="Maksimal 20 karakter">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Password</label>
 						<div class="controls">
-							<input type="password" id="required" name="password">
+							<input type="password" id="password" name="password" maxlength="20" placeholder="Maksimal 20 karakter">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Nomor Identitas</label>
 						<div class="controls">
-							<input type="text" id="required" name="nomor_identitas_donatur">
+							<input type="text" id="nomor_identitas_donatur" maxlength="20" placeholder="Maksimal 20 karakter" name="nomor_identitas_donatur">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">NIK</label>
 						<div class="controls">
-							<input type="text" id="required" name="nik">
+							<input type="text" id="nik" maxlength="16" placeholder="Maksimal 16 karakter" name="nik">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">E-mail</label>
 						<div class="controls">
-							<input type="text" id="required" name="email">
+							<input type="text" id="email" name="email" maxlength="50" placeholder="Maksimal 50 karakter" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Nama Lengkap</label>
 						<div class="controls">
-							<input type="text" id="required" name="nama">
+							<input type="text" id="nama" maxlength="50" placeholder="Maksimal 50 karakter" name="nama">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">NPWP</label>
 						<div class="controls">
-							<input type="text" id="required" name="npwp">
+							<input type="text" id="npwp" maxlength="20" name="npwp" placeholder="Maksimal 20 karakter">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Nomor Telepon</label>
 						<div class="controls">
-							<input type="text" id="required" name="no_telp">
+							<input type="text" id="no_telp" name="no_telp" maxlength="20" placeholder="Maksimal 20 karakter">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Alamat Lengkap</label>
 						<div class="controls">
-							  <textarea class="span5" name="alamat"></textarea>
+							  <textarea class="span5" id="alamat" name="alamat"></textarea>
 						</div>
 					</div>
 					<div class="form-actions">
@@ -117,6 +117,41 @@
     </div>
   </div>
 </div>
+<script>
+	function validateForm() {
+		var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+		if (document.getElementById('username').value==""){
+	        alert("Username harus diisi");
+	        document.form.username.focus() ;
+	        return false;
+	    }else if (document.getElementById('nik').value==""){
+	        alert("NIK harus diisi");
+	        document.form.nik.focus() ;
+	        return false;
+	    }else if (document.getElementById('email').value==""){
+	        alert("E-mail harus diisi");
+	        document.form.email.focus() ;
+	        return false;
+	    }else if (document.getElementById('nama').value==""){
+	        alert("Nama lengkap harus diisi");
+	        document.form.nama.focus() ;
+	        return false;
+	    }else if (document.getElementById('npwp').value==""){
+	        alert("Nomor NPWP tinggal harus diisi");
+	        document.form.npwp.focus() ;
+	        return false;
+	    }else if (document.getElementById('alamat').value==""){
+	        alert("Alamat harus diisi");
+	        document.form.alamat.focus() ;
+	        return false;
+	    }}else if (regex.test(document.getElementById('password').value)) {
+	        return true;
+	    }else {
+	    	alert("Password harus terdiri dari angka dan bilangan, panjang minimal 8 karakter");
+	        return false;
+	    }
+	}
+</script>
 <div class="row-fluid">
   <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>

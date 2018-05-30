@@ -16,7 +16,6 @@ public class SkemaBeasiswaModel {
 	private String jenis;
 	private String deskripsi;
 	private String nomor_identitas_donatur;
-	
-	private int no_urut;
+
 	private String syarat;
 }

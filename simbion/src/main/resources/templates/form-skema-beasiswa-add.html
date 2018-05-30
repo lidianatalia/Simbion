@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="fragments/fragment_donatur :: header"></div>
+<div th:replace="fragments/fragment :: header"></div>
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Paket Beasiswa</a><a href="#" class="current">Membuat Paket Beasiswa</a></div>
@@ -31,18 +31,17 @@
 			</div>
 			<div class="widget-content nopadding">
 
-				<form class="form-horizontal" method="post" action="/donatur/form-skema-tambah/simpan" name="basic_validate" id="basic_validate" novalidate="novalidate">
-
+				<form class="form-horizontal" method="post" th:action="@{/form-skema-tambah/simpan}" id="form" onsubmit="return validateForm()">
 					<div class="control-group">
 						<label class="control-label">Kode</label>
 						<div class="controls">
-							<input type="text" id="required" name="kode">
+							<input type="text" id="kode" name="kode">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Nama Paket Beasiswa</label>
 						<div class="controls">
-							<input type="text" id="required" name="nama">
+							<input type="text" id="nama" name="nama">
 						</div>
 					</div>
 					<div class="control-group">
@@ -58,13 +57,13 @@
 					<div class="control-group">
 						<label class="control-label">Deskripsi</label>
 						<div class="controls">
-							<textarea id="required"  class="span5" name="deskripsi"></textarea>
+							<textarea id="deskripsi" class="span5" name="deskripsi"></textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Syarat Beasiswa</label>
 						<div class="controls">
-							<input type="text" id="required" name="syarat">
+							<textarea id="syarat" class="span5" name="syarat" placeholder="Setiap persyaratan pisahkan dengan tanda koma"></textarea>
 						</div>
 					</div>
 					<div class="form-actions">
@@ -77,6 +76,31 @@
     </div>
   </div>
 </div>
+<script>
+	function validateForm() {
+		if (document.getElementById('kode').value==""){
+	        alert("Kode beasiswa harus diisi");
+	        document.form.kode.focus() ;
+	        return false;
+	    }else if (document.getElementById('nama').value==""){
+	        alert("Nama paket beasiswa harus diisi");
+	        document.form.nama.focus() ;
+	        return false;
+	    }else if (document.getElementById('jenis').value==""){
+	        alert("Jenis beasiswa harus diisi");
+	        document.form.jenis.focus() ;
+	        return false;
+	    }else if (document.getElementById('deskripsi').value==""){
+	        alert("Deskripsi beasiswa harus diisi");
+	        document.form.deskripsi.focus() ;
+	        return false;
+	    }else if (document.getElementById('syarat').value==""){
+	        alert("Syarat harus diisi");
+	        document.form.syarat.focus() ;
+	        return false;
+	    }
+	}
+</script>
 <div class="row-fluid">
   <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>

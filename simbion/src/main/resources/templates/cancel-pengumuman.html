@@ -12,11 +12,11 @@
 	<link rel="stylesheet" href="/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
-<div th:replace="/fragments/fragment_donatur :: header"></div>
+<div th:replace="fragments/fragment :: header"></div>
 	<div id="content">
 		<div id="content-header">
-			<div id="breadcrumb"> <a href="/donatur" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
-				<h1>Donatur</h1>
+			<div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i>Beranda</a></div>
+				<h1></h1>
 			</div>
   <div class="container-fluid">
     <div class="row-fluid">
@@ -24,32 +24,10 @@
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>List Beasiswa</h5>
+            <h3>Success</h3>
           </div>
           <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
-              <thead>
-                <tr>
-	       			<th>No</th>
-	       			<th>Nama Beasiswa</th>
-	       			<th>Waktu Tutup Pendaftaran</th>
-	       			<th>Status Beasiswa</th>
-	       			<th>Jumlah Pendaftar</th>
-	       			<th>Rincian</th>
-                </tr>
-              </thead>
-              <tbody>
-                 <tr th:each="beasiswa,iterationStatus: ${beasiswaAktif}">
-   					<td th:text="${beasiswa.no_urut}"></td>
-   					<td th:text="${beasiswa.nama}"></td>
-   					<td th:text="${beasiswa.tgl_tutup_pendaftaran}"></td>
-   					<td th:text="${beasiswa.status}"></td>
-   					<td th:text="${beasiswa.jumlah_pendaftar}"></td>
-   					<td><a th:href="'/donatur/view-detail-skema/'+ ${beasiswa.no_urut}"><button type="button" class="btn btn-info" >
-   					Detail</button></a></td>
-   				</tr>
-              </tbody>
-            </table>
+            Pengumuman sudah pernah Anda tambahkan.
           </div>
         </div>
       </div>
